@@ -1,0 +1,117 @@
+<% include ../partials/ecommerce-hd %>
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg padding-y border-top">
+<div class="container">
+  <nav class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/pages/store-front">Store-front</a></li>
+    <li class="breadcrumb-item "><a href="/pages/store-front/p/shopping-cart">Cart</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+  </ol>
+  </nav>
+<div class="row">
+	<main class="col-sm-9"  style="margin-bottom:20px">
+
+<div class="card">
+  <div class="card-body">
+    <div class="col-md-8 offset-md-2 ">
+
+  <div class="card">
+  <header class="card-header">
+    <!-- <h4  class="float-right btn btn-outline-primary mt-1">Your Total: GHC </h4> -->
+  	<!-- <a href="/users/login" class="float-right btn btn-outline-primary mt-1">Log in</a> -->
+    <h4 class="float-right  mt-1 text-info" style="" id="checkout_total" data="<%=totalPrice%>"> Your Total: GHC <%=totalPrice%></h4>
+  	<h4 class="card-title mt-2">Checkout</h4>
+    <%- messages('message',locals) %>
+  </header>
+  <article class="card-body">
+
+ <form class="" action="/pages/store-front/p/shopping-cart/checkout" method="post">
+
+  		<div class="form-group">
+  			<label>Fullname</label>
+  		  	<input type="text" id="fname"  name="fname" class="form-control" value="<%=user.firstname%> <%=user.lastname%>" disabled>
+  		</div>
+      <div class="form-group">
+        <label>E-mail</label>
+          <input type="text" id="email"  name="email" class="form-control" value="<%=user.email%>" disabled>
+      </div>
+    <div class="form-group">
+  		<label for="pnumber">Phone number</label>
+  		<input type="text" id="pnumber" name="pnumber" class="form-control" value="<%=user.phone_num%>" disabled>
+  	</div>
+    <div class="form-group">
+  		<label for="pnumber">Order Description</label>
+      <textarea name="order_desc" id="order_desc" class="form-control" rows="4" cols="40"></textarea>
+  	</div>
+      <div class="form-group" >
+
+          <button type="submit" class="btn btn-primary btn-block" id="checkout"> checkout  </button>
+      </div> <!-- form-group// -->
+  </article> <!-- card-body end .// -->
+   </form>
+  </div> <!-- card.// -->
+
+
+          <!-- /.wrap-card -->
+        </div>
+</div>
+</div> <!-- card.// -->
+
+	</main> <!-- col.// -->
+
+	<aside class="col-sm-3">
+      <div class="col" >
+        <div class="card">
+        	<div class="card-header">
+        	    For Support
+        	</div>
+          <div class="card-body small">
+        		 <b>Call <i class="fa fa-phone"></i> +233 247 004 668</b>
+        		 <hr>
+        		 Please contact with us if you have any questions. <br> We are available
+             Monday - Saturday from 9:00 AM - 5:00 PM.
+        	</div> <!-- card-body.// -->
+        </div>
+      </div>
+      <div class="col" style="margin-top:20px">
+        <div class="card">
+        	<div class="card-header">
+        	   You may like
+        	</div>
+          <div class="card-body row">
+      <% for (var i = 0; i < product.length; i++) { %>
+<div class="col-md-12 col-sm-3">
+	<figure class="item border-bottom mb-3">
+			<a href="/pages/store-front/product_detail/p/?q=<%= product[i]._id %>" class="img-wrap"> <img src="/../../images/<%= product[i].imagePath_one %>" class="img-md"></a>
+			<figcaption class="info-wrap">
+				<a href="/pages/store-front/product_detail/p/?q=<%= product[i]._id %>" class="title"><%= product[i].title %></a>
+				<div class="price-wrap mb-3">
+					<span class="price-new">Ghc <%= product[i].price %></span>
+				</div> <!-- price-wrap.// -->
+			</figcaption>
+	</figure> <!-- card-product // -->
+</div> <!-- col.// -->
+<%}%>
+	</div> <!-- card-body.// -->
+        </div>
+      </div>
+
+
+	</aside> <!-- col.// -->
+
+
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= FOOTER ========================= -->
+<% include ../partials/footer %>
+<!-- ========================= FOOTER END // ========================= -->
+
+
+</body>
+</html>

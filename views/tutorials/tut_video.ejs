@@ -1,0 +1,112 @@
+<% include ../partials/tutorials-hd %>
+<section class="section-content bg padding-y-sm">
+<div class="container">
+<nav class="mb-3">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="/tutorials">Tutorials</li>
+</ol>
+</nav>
+
+<div class="row">
+<div class="col-xl-12 col-md-12 col-sm-12">
+
+
+  <main class="card">
+    <div class="card-body">
+      <!--=================== WATCH TUTORIAL ====================  -->
+      <div class="container ">
+  <div class="col-lg-12 ">
+      <div class="col-lg-12">
+        <div class="row">
+            <div class="col-md-6">
+              <% if (tut_video){ %>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="<%= tut_video.video_url %>" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <ul class="nav nav-tabs" id="myTab" role="tablist" >
+                <li class="nav-item">
+                 <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true"> <small>OVERVIEW</small> </a>
+                </li>
+                <li class="nav-item">
+                 <a class="nav-link" id="qualification-tab" data-toggle="tab" href="#qualification" role="tab" aria-controls="qualification" aria-selected="true"> <small>INSTRUCTIONS</small> </a>
+                </li>
+                <li class="nav-item">
+                 <a class="nav-link" id="exprience-tab" data-toggle="tab" href="#exprience" role="tab" aria-controls="exprience" aria-selected="true"> <small>MATERIALS</small> </a>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active scrollbar scrollbar-primary" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                  <div class="force-overflow">
+                      <h5>Overview </h5>
+                      <h6><%- tut_video.short_desc %></h6>
+                      <p><%- tut_video.overview %></p>
+                </div>
+              </div>
+
+                <div class="tab-pane fade scrollbar scrollbar-primary" id="qualification" role="tabpanel" aria-labelledby="qualification-tab">
+                  <div class="force-overflow">
+                      <h5>INSTRUCTIONS </h5>
+                      <p><%- tut_video.instructions %></p>
+                </div>
+                  </div>
+                  <div class="tab-pane fade scrollbar scrollbar-primary" id="exprience" role="tabpanel" aria-labelledby="exprience-tab">
+                    <div class="force-overflow">
+                          <h5>MATERIALS </h5>
+                          <p><a href="../../files/<%= tut_video.materials %>"><%= tut_video.materials %></a></p>
+                          
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <% } %>
+          </div>
+      </div>
+
+  </div>
+</div>
+      <!--===================== WATCH TUTORIAL END// ===============  -->
+    </div>
+  </main>
+  <section class="section-content padding-y-sm bg">
+  <div class="container">
+
+  <header class="section-heading heading-line">
+  	<h4 class="title-section bg text-uppercase">Related videos</h4>
+  </header>
+
+  <article class="card mt-3">
+  	<div class="card-body">
+      <div class="row">
+        <ul class="list-unstyled video-list-thumbs row">
+          <% for(var i=0; i< related_videos.length; i++){ %>
+              <li class="col-lg-3 col-sm-4 col-xs-6">
+                <a href="/tutorials/view/<%= related_videos[i]._id %>" title="Claudio Bravo, antes su debut con el Barça en la Liga">
+                  <img src="<%= related_videos[i].videoImg_url %>" alt="turial video preview" class="img-responsive" height="130px" style="width:100%"/>
+                  <h2><%= related_videos[i].short_desc %></h2>
+                  <i class="fa fa-play-circle-o"></i>
+                </a>
+              </li>
+            <% } %>
+        </ul>
+      </div>
+
+
+  	</div> <!-- card-body.// -->
+  </article> <!-- card.// -->
+
+  </div>
+  </section>
+
+
+  <!-- PRODUCT DETAIL .// -->
+</div>
+
+
+</div>
+</section>
+<% include ../partials/footer %>

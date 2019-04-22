@@ -1,0 +1,243 @@
+<% include ../items-header %>
+<!-- modal -->
+  <div class="modal fade bd-example-modal-lg" id="update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Update</h5> -->
+        <div class="media">
+          <img class="mr-3" id="updateimg" width="64" height="64">
+          <input type="hidden" id="updatehid">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="itemtitle" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" id="itemtitle">
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="itemprice" class="col-form-label">Price GHc:</label>
+                <input type="text" class="form-control" id="itemprice">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="itemQuantity" class="col-form-label">Quantities:</label>
+                <input type="text" class="form-control" id="itemQuantity">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="itemdescription" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="itemdescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="detailtemdescription" class="col-form-label">Detailed Description:</label>
+            <textarea class="form-control" id="detailtemdescription" name="detailtemdescription"></textarea>
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="UpdateSubmit()" data-dismiss="modal">Save update</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/modal  -->
+<section class="section-content bg padding-y-sm">
+<div class="container">
+<nav class="mb-3">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/areacode97/admin/outofbound/admin/home">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="/about">Items stock</li>
+</ol>
+</nav>
+
+<div class="row">
+  <div class=" col-md-5 ">
+      <main class="card">
+        <div class="card-body">
+          <!-- <textarea class="form-control" id="overview" name="overview"></textarea> -->
+          <h1>Add new items to stock</h1>
+               <form  action="/areacode97/admin/outofbound/admin/items" method="post" encType="multipart/form-data">
+                 <div class="form-group">
+                   <label for="itemtitle" class="col-form-label">Title:</label>
+                   <input type="text" class="form-control" id="itemtitle" name="itemtitle">
+                   <% if( typeof itemtitle_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= itemtitle_errMsg %> </p> <%}%>
+                 </div>
+                 <div class="form-group">
+                   <label for="itemcat" class="col-form-label">Item category</label>
+                   <select class="form-control" name="itemcat">
+                     <option value="Arduino">Arduino</option>
+                     <option value="Raspberry pi">Raspberry pi</option>
+                     <option value="Kits">Kits</option>
+                     <option value="Analog Sensors">Analog Sensors</option>
+                     <option value="Digital Sensors">Digital Sensors</option>
+                     <option value="Cellulars">Cellulars</option>
+                     <option value="Integrated circuits">Integrated circuits</option>
+                     <option value="Servos">Servos</option>
+                     <option value="Batteries">Batteries</option>
+                     <option value="Cables">Cables</option>
+                     <option value="Displays">Displays</option>
+                     <option value="Wireless modules">Wireless modules</option>
+                     <option value="Breakout boards">Breakout boards</option>
+                     <option value="PCB enclosures and Cases">PCB enclosures and Cases</option>
+                     <option value="Power Supply">Power Supply</option>
+                   </select>
+                 </div>
+                 <div class="row">
+                   <div class="col">
+                     <div class="form-group">
+                       <label for="img1" class="col-form-label">image 1</label>
+                       <input type="file" class="form-control" id="img1" name="img1" >
+                       <% if( typeof file1_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= file1_errMsg %> </p> <%}%>
+                       <label for="img1" class="col-form-label">image 2</label>
+                       <input type="file" class="form-control" id="img2" name="img2" >
+                       <label for="img1" class="col-form-label">image 3</label>
+                       <input type="file" class="form-control" id="img3" name="img3" >
+                       <label for="img1" class="col-form-label">image 4</label>
+                       <input type="file" class="form-control" id="img4" name="img4" >
+                     </div>
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="col">
+                     <div class="form-group">
+                       <label for="itemprice" class="col-form-label">Price GHc:</label>
+                       <input type="text" class="form-control" id="itemprice" name="itemprice">
+                       <% if( typeof itemprice_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= itemprice_errMsg %> </p> <%}%>
+                     </div>
+                   </div>
+                   <div class="col">
+                     <div class="form-group">
+                       <label for="itemQuantity" class="col-form-label">Quantities:</label>
+                       <input type="text" class="form-control" id="itemQuantity" name="itemQuantity">
+                       <% if( typeof itemQuantity_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= itemQuantity_errMsg %> </p> <%}%>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="form-group">
+                   <label for="itemdescription" class="col-form-label">Short Description:</label>
+                   <textarea class="form-control" id="itemdescription" name="itemdescription"></textarea>
+                   <% if( typeof itemdescription_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= itemdescription_errMsg %> </p> <%}%>
+                 </div>
+                 <div class="form-group">
+                   <label for="detailtemdescription" class="col-form-label">Detailed Description:</label>
+                   <textarea class="form-control" id="detailtemdesc" name="detailtemdescription"></textarea>
+                   <!-- <textarea class="form-control" id="detailtemdescription" name="detailtemdescription"></textarea> -->
+                   <% if( typeof detailtemdescription_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= detailtemdescription_errMsg %> </p> <%}%>
+                 </div>
+                 <div class="form-group">
+                   <button type="submit" class="form-control btn btn-bg  btn-info">Add to Item</button>
+                 </div>
+               </form>
+        </div>
+      </main>
+    </div>
+  <div class=" col-md-7 ">
+      <main class="card">
+        <div class="card-body">
+          <h6>ITEMS LIST</h6>
+          <div class="list-wrapper">
+              <table class="table table-inbox table-hover">
+                <tbody>
+                  <% if(components){ %>
+                  <% for(var i=0; i < components.length; i++){ %>
+              <tr>
+                <td class="view-message "> <img class="mr-3" src="../../../../images/<%= components[i].imagePath_one %>" alt="component image" width="64" height="64"></td>
+                  <td class="view-message"> <small><%= components[i].title %></small> </td>
+                  <td class="view-message"><small><b>Qty: ( <%= components[i].quantities %> pieces )</b></small></td>
+                  <td class="view-message"> <small><b>Price GHc: ( <%= components[i].price %> )</b></small> </td>
+                  <td class="view-message">
+                    <button type="button" id="<%=components[i].id %>_trash" class="btn btn-sm btn-danger delete-item"><i class="fa fa-trash"></i></button>
+                    <button type="button" id="<%=components[i].id %>_update" class="btn btn-sm  btn-info update-item" data-toggle="modal" data-target="#update">Update</button>
+                  </td>
+              </tr>
+              <%  }} %>
+          </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+</div>
+</div>
+</section>
+<script type="text/javascript">
+
+    $('#detailtemdesc').summernote();
+var components = <%-JSON.stringify(components) %>
+
+       $(".delete-item").on("click",function($ev){
+         var parse_id = $(this).attr('id');
+         var id = parse_id.split('_')[0];
+         var data = {id:id,del:'delete'}
+
+         $.ajax({
+           type        : 'post',
+           data        : data,
+           dataType    : 'json',
+           url         : '/areacode97/admin/outofbound/admin/ulter',
+           success     : function(data){
+             if(data.ok == 1){
+               location.reload(true);
+             }
+           }
+         });
+
+       });
+
+       $(".update-item").on("click",function($ev){
+         var parse_id = $(this).attr('id');
+         var id = parse_id.split('_')[0];
+         components.forEach(function (items) {
+           if(items._id == id){
+             $('#updatehid').val(items._id);
+             $('#itemtitle').val(items.title);
+             $('#itemprice').val(items.price);
+             $('#itemQuantity').val(items.quantities);
+             $('#itemdescription').val(items.description);
+             $('#detailtemdescription').val(items.detailed_description);
+             $('#updateimg').attr('src','../../../../images/'+items.imagePath_one);
+
+           }
+
+         });
+       });
+
+       function UpdateSubmit() {
+            var id              = $('#updatehid').val();
+            var itemtitle       = $('#itemtitle').val();
+            var itemprice       = $('#itemprice').val();
+            var itemQuantity    = $('#itemQuantity').val();
+            var itemdescription = $('#itemdescription').val();
+            var detailtemdescription = $('#detailtemdescription').val();
+            var data = {id:id,itemtitle:itemtitle,itemprice:itemprice,itemQuantity:itemQuantity,itemdescription:itemdescription,detailtemdescription:detailtemdescription}
+              // make ajax call /areacode97/admin/outofbound/admin/items
+              $.ajax({
+                type        : 'post',
+                data        : data,
+                dataType    : 'json',
+                url         : '/areacode97/admin/outofbound/admin/ulter',
+                success     : function(data){
+                  if(data.ok == 1){
+                    swal({
+                    title: "Completed!",
+                    text: "Item Updated successfully",
+                    icon: "success",
+                    button: "Done!",
+                  });
+
+                  }
+                }
+              });
+}
+</script>

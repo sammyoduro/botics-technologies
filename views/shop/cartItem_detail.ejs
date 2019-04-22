@@ -1,0 +1,139 @@
+<% include ../partials/ecommerce-hd %>
+
+<!-- ========================= SECTION CONTENT ========================= -->
+
+<section class="section-content bg padding-y-sm">
+<div class="container">
+<nav class="mb-3">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/pages/store-front">Store-front</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Shopping-cart item</li>
+</ol>
+</nav>
+
+<div class="row">
+<div class="col-xl-10 col-md-9 col-sm-12">
+
+<% if( product ){ %>
+
+<main class="card">
+	<div class="row no-gutters">
+		<aside class="col-sm-6 border-right">
+<article class="gallery-wrap">
+<div class="img-big-wrap">
+  <div> <a href="/../../images/<%= product.imagePath_one %>" class="data-fancybox" data-fancybox=""><img src="/../../images/<%= product.imagePath_one %>" class="displayimg"></a></div>
+</div> <!-- slider-product.// -->
+<div class="img-small-wrap">
+<% if( product.imagePath_one ){ %><div class="item-gallery"> <img src="/../../images/<%= product.imagePath_one %>" class="zoomimg"></div> <% } %>
+<% if( product.imagePath_two ){ %><div class="item-gallery"> <img src="/../../images/<%= product.imagePath_two %>" class="zoomimg"></div> <% } %>
+<% if( product.imagePath_three ){ %><div class="item-gallery"> <img src="/../../images/<%= product.imagePath_three %>" class="zoomimg"></div> <% } %>
+<% if( product.imagePath_four ){ %><div class="item-gallery"> <img src="/../../images/<%= product.imagePath_four %>" class="zoomimg"></div> <% } %>
+</div> <!-- slider-nav.// -->
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<aside class="col-sm-6">
+<article class="card-body">
+<!-- short-info-wrap -->
+	<h3 class="title mb-3"><%= product.title %></h3>
+
+<div class="mb-3">
+	<var class="price h3 text-warning">
+		<span class="currency">Ghc </span><span class="num"><%= product.price %></span>
+	</var>
+	<span>/per item <b class="text-muted">(<%=product.quantities%> items in stock)</b></span>
+</div> <!-- price-detail-wrap .// -->
+<dl>
+  <dt>Description</dt>
+  <dd><p><%= product.description %></p></dd>
+</dl>
+<hr>
+	<div class="row">
+		<div class="col-sm-5">
+      <dl class="dlist-inline">
+			  <dt>Quantity: </dt>
+			  <dd>
+          <div class="control-wrap">
+              <div class="dtbtn-minus" data-id="<%= product._id%>"> <i class="fa fa-minus"></i></span> </div>
+              <input name="name" value="<%= product.qty %>" id="<%= product._id %>" class="dtcartAlter"/>
+              <div class="dtbtn-plus" data-id="<%= product._id%>"> <i class="fa fa-plus"></i></div>
+          </div>
+			  </dd>
+			</dl>  <!-- item-property .// -->
+		</div> <!-- col.// -->
+		<div class="col-sm-7">
+      <dl class="dlist-inline">
+			  <dt>Orders</dt>
+			  <dd>
+			  &nbsp; &nbsp;	 99
+			  </dd>
+		</dl>
+		</div> <!-- col.// -->
+	</div> <!-- row.// -->
+	<hr>
+  <button class="btn  btn-primary" id="buynow"> Buy now </button>
+  <button type="button" id="<%= product.id %>" class="btn btn-bg btn-warning addtocart" ><i class="fa fa-shopping-cart"></i></button>
+<!-- short-info-wrap .// -->
+</article> <!-- card-body.// -->
+		</aside> <!-- col.// -->
+	</div> <!-- row.// -->
+</main> <!-- card.// -->
+
+<!-- PRODUCT DETAIL -->
+<article class="card mt-3">
+	<div class="card-body">
+		<h4>Detail overview</h4>
+	   <%-product.detailed_description; %>
+
+	</div> <!-- card-body.// -->
+</article> <!-- card.// -->
+
+<!-- PRODUCT DETAIL .// -->
+
+</div> <!-- col // -->
+<aside class="col-xl-2 col-md-3 col-sm-12">
+<div class="card">
+	<div class="card-header">
+	    For Support
+	</div>
+	<div class="card-body small">
+		 <b>Call <i class="fa fa-phone"></i> +233 247 004 668</b>
+		 <hr>
+     Please contact with us if you have any questions. <br> We are available
+     Monday - Saturday from 9:00 AM - 5:00 PM.
+	</div> <!-- card-body.// -->
+</div> <!-- card.// -->
+<div class="card mt-3">
+	<div class="card-header">
+	    You may like
+	</div>
+	<div class="card-body row">
+    <% for (var i = 0; i < shuff_product.length; i++) { %>
+<div class="col-md-12 col-sm-3">
+	<figure class="item border-bottom mb-3">
+			<a href="/pages/store-front/product_detail/p/?q=<%= shuff_product[i]._id %>" class="img-wrap"> <img src="/../../images/<%= shuff_product[i].imagePath_one %>" class="img-md"></a>
+			<figcaption class="info-wrap">
+				<a href="/pages/store-front/product_detail/p/?q=<%= shuff_product[i]._id %>" class="title"><%= shuff_product[i].title %></a>
+				<div class="price-wrap mb-3">
+					<span class="price-new">Ghc <%= shuff_product[i].price %></span>
+				</div> <!-- price-wrap.// -->
+			</figcaption>
+	</figure> <!-- card-product // -->
+</div> <!-- col.// -->
+<% } %>
+	</div> <!-- card-body.// -->
+</div> <!-- card.// -->
+</aside> <!-- col // -->
+</div> <!-- row.// -->
+</div><!-- container // -->
+</section>
+<% } %>
+<!-- ========================= SECTION CONTENT .END// ========================= -->
+
+<!-- ========================= FOOTER ========================= -->
+<% include ../partials/footer %>
+<!-- ========================= FOOTER END // ========================= -->
+
+
+</body>
+</html>

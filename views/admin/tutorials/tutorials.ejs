@@ -1,0 +1,96 @@
+<% include ../tuts-header %>
+
+<section class="section-content bg padding-y-sm">
+<div class="container">
+  <nav class="mb-3">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="/about">Tutorials</li>
+  </ol>
+  </nav>
+
+
+  <div class=" col-md-7 offset-md-3 ">
+    <main class="card">
+      <div class="card-body">
+                  <h1>New tutorials</h1>
+                  <form  action="/areacode97/admin/outofbound/admin/tutorials/new" method="post" encType="multipart/form-data">
+                    <div class="form-group">
+                      <label for="vidurl" class="col-form-label">Tutorial video URL:</label>
+                      <input type="text" class="form-control" id="vidurl" name="vidurl">
+  <% if( typeof vidurl_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= vidurl_errMsg %> </p> <%}%>
+                    </div>
+                    <div class="form-group">
+                      <label for="vid_imgurl" class="col-form-label">Tutorial video image URL:</label>
+                      <input type="text" class="form-control" id="vid_imgurl" name="vid_imgurl">
+                      <% if( typeof vid_imgurl_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= vid_imgurl_errMsg %> </p> <%}%>
+                    </div>
+                    <div class="form-group">
+                      <label for="tshortdesc" class="col-form-label">Tutorials Short Description:</label>
+                      <textarea class="form-control" id="tshortdesc" name="tshortdesc" maxlength="80"></textarea>
+                      <% if( typeof tshortdesc_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= tshortdesc_errMsg %> </p> <%}%>
+                    </div>
+                    <div class="form-group">
+                      <label for="overview" class="col-form-label">Overview:</label>
+                      <textarea class="form-control" id="overview" name="overview"></textarea>
+                      <% if( typeof overview_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= overview_errMsg %> </p> <%}%>
+                    </div>
+                    <div class="form-group">
+                      <label for="instructions" class="col-form-label">Instructions:</label>
+                      <textarea class="form-control" id="instructions" name="instructions"></textarea>
+                      <% if( typeof instructions_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= instructions_errMsg %> </p> <%}%>
+                    </div>
+                    <div class="form-group">
+                      <label for="materials" class="col-form-label">Upload code</label>
+                      <input type="file" class="form-control" id="materials" name="materials" multiple>
+    <% if( typeof materials_errMsg != 'undefined' ){ %> <p class="text-danger"> <%= materials_errMsg %> </p> <%}%>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="form-control btn btn-bg btn btn-info" >Upload</button>
+                    </div>
+                  </form>
+    </div>
+    </main>
+  </div>
+  <div class=" col-md-12" style="margin-top:10px">
+        <h6>TUTORIALS LIST</h6>
+        <div class="list-wrapper">
+          <div class="card">
+          <div class="card-body">
+          	<div class="row ">
+              <ul class="list-unstyled video-list-thumbs row">
+                  <% if (videos){ %>
+                    <% for(var i=0; i< videos.length; i++){ %>
+                      <li class="col-lg-3 col-sm-4 col-xs-6">
+                        <a href="javascript:void();" class="watch-tuts" url="<%= videos[i].video_url %>">
+                          <img src="<%= videos[i].videoImg_url %>" alt="turial video preview" class="img-responsive" height="130px" style="width:100%"/>
+                          <h2><%= videos[i].short_desc %></h2>
+                          <i class="fa fa-play-circle-o"></i>
+                        </a>
+                      </li>
+                    <% } %>
+                  <% } %>
+                </ul>
+          	</div> <!-- row.// -->
+          </div>
+          </div> <!-- card.// -->
+        </div>
+  </div>
+
+</div>
+</section>
+<script type="text/javascript">
+       $(document).ready(function () {
+           $('#sidebarCollapse').on('click', function () {
+               $('#sidebar').toggleClass('active');
+           });
+           $('.watch-tuts').on('click', function () {
+             var vidurl = $(this).attr('url');
+             // alert($(this).attr('url')); modal-body
+             $('.modal-body').html('<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="'+vidurl+'"allowfullscreen></iframe></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div>')
+               $('#watch_tuts').modal();
+           });
+       });
+
+       $('#overview').summernote();
+       $('#instructions').summernote();
+   </script>

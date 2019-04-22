@@ -1,0 +1,95 @@
+<% include ../partials/tutorials-hd %>
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-main bg padding-y-sm">
+<div class="container">
+<div class="card">
+	<div class="card-body">
+<div class="row row-sm">
+	<div class="col-md-9">
+
+		<div class="video-responsive">
+			<iframe width="100%" height="315" src="https://www.youtube.com/embed/-3_pAazPExA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+
+
+
+
+	</div> <!-- col.// -->
+  <aside class="col-md-3">
+<h5 class="text-uppercase">Featured Projects</h5>
+  <ul class="menu-category list-dots">
+		<% if (typeof featuredvid != 'undefined') { %>
+			<% for (var i = 0; i < featuredvid.length; i++) { %>
+				<li> <a href="/featured_vid/view?id=<%= featuredvid[i].id %>"><%= featuredvid[i].title %></a></li>
+		<%	} %>
+	<%}%>
+    <li> <a href="/featured_videos">More ...  </a></li>
+  </ul>
+
+  </aside> <!-- col.// -->
+</div> <!-- row.// -->
+	</div> <!-- card-body .// -->
+</div> <!-- card.// -->
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+<!--==============================TUTS LIST ==============================  -->
+<section class="section-content padding-y-sm bg">
+<div class="container">
+
+<header class="section-heading heading-line">
+	<h4 class="title-section bg text-uppercase">Tutorials</h4>
+</header>
+
+<div class="card">
+<div class="card-body">
+	<div class="row ">
+    <ul class="list-unstyled video-list-thumbs row">
+        <% if (videos){ %>
+          <% for(var i=0; i< videos.length; i++){ %>
+            <li class="col-lg-3 col-sm-4 col-xs-6">
+              <a href="/tutorials/view/<%= videos[i].id %>" title="Claudio Bravo, antes su debut con el Barça en la Liga">
+                <img src="<%= videos[i].videoImg_url %>" alt="turial video preview" class="img-responsive" height="130px" style="width:100%"/>
+                <h2><%= videos[i].short_desc %></h2>
+                <i class="fa fa-play-circle-o"></i>
+              </a>
+            </li>
+          <% } %>
+        <% } %>
+      </ul>
+	</div> <!-- row.// -->
+</div>
+</div> <!-- card.// -->
+<!-- pagination -->
+              <nav aria-label="Page navigation " style="margin-top:10px">
+              <ul class="pagination  justify-content-center">
+                            <% if (current == 1) { %>
+                                <li class="page-item disabled"><a class="page-link">First</a></li>
+                            <% } else { %>
+                                <li class="page-item"><a class="page-link" href="/tutorials/1">First</a></li>
+                            <% } %>
+                            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                            <% if (i !== 1) { %>
+                                <li class="page-item disabled"><a class="page-link" >...</a></li>
+                            <% } %>
+                            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                <% if (i == current) { %>
+                                    <li class="page-item active"><a class="page-link" ><%= i %></a></li>
+                                <% } else { %>
+                                    <li class="page-item"><a class="page-link"  href="/tutorials/<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% if (i == Number(current) + 4 && i < pages) { %>
+                                    <li class="page-item disabled"><a class="page-link" >...</a></li>
+                                <% } %>
+                            <% } %>
+                            <% if (current == pages) { %>
+                                <li class="page-item disabled"><a class="page-link">Last</a></li>
+                            <% } else { %>
+                                <li class="page-item"><a class="page-link" href="/tutorials/<%= pages %>">Last</a></li>
+                            <% } %>
+                        </ul>
+                      </nav>
+</div> <!-- container .//  -->
+</section>
+<!--===============================TUTS LIST END// ==========================  -->
+<% include ../partials/footer %>

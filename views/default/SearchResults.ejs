@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Bootstrap-ecommerce by Vosidiy">
+
+<title>Botics Technologies</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- Bootstrap4 files-->
+<script src="../../javascripts/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="../../stylesheets/bootstrap.css?v=1.0" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- plugin: fancybox  -->
+<script src="../../plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
+<link href="../../plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
+
+<!-- plugin: owl carousel  -->
+<link href="../../plugins/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="../../plugins/owlcarousel/assets/owl.theme.default.css" rel="stylesheet">
+<script src="../../plugins/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- custom style -->
+<link href="../../stylesheets/ui.css?v=1.0" rel="stylesheet" type="text/css"/>
+<link href="../../stylesheets/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+<link href="../../stylesheets/style.css" rel="stylesheet" type="text/css"/>
+<!-- custom javascript -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../../javascripts/script.js" type="text/javascript"></script>
+
+</head>
+<body>
+<header class="section-header">
+  <section class="header-main">
+  	<div class="container">
+  <div class="row align-items-center">
+  	<div class="col-lg-3 col-sm-4">
+  	<div class="brand-wrap">
+  		<a href="/"><img class="logo" src="../../images/one.png"></a>
+  		<!-- <h2 class="logo-text">BOTICS TECHNOLOGIES</h2> -->
+  	</div> <!-- brand-wrap.// -->
+  	</div>
+  	<div class="col-lg-4 col-xl-5 col-sm-8">
+  			<form action="/Search/q" method="get" class="search-wrap">
+  				<div class="input-group w-100">
+  				    <input type="text" name="searchbox" class="form-control" id="searchbox" style="width:55%;" placeholder="Search item or tutorial" required>
+              <select class="custom-select"  id="SearchFilter" name="SearchFilter">
+                <option value="Items" > Items </option>
+                <option value="Videos"> Videos </option>
+  					</select>
+  				    <div class="input-group-append">
+  				      <button class="btn btn-primary" type="submit">
+  				        <i class="fa fa-search"></i>
+  				      </button>
+  				    </div>
+
+
+  			    </div>
+  			</form> <!-- search-wrap .end// -->
+  	</div> <!-- col.// -->
+  	<div class="col-lg-5 col-xl-4 col-sm-12">
+      <div class="widgets-wrap float-right">
+  			<a href="/pages/store-front/p/shopping-cart" class="widget-header mr-3">
+  				<div class="icontext">
+  					<div class="icon-wrap"><i class="icon-sm round border fa fa-shopping-cart"></i></div>
+  					<div class="text-wrap">
+              <% if( typeof session.cart != 'undefined' && session.cart != ''){ %>
+                <span class="small badge badge-danger">
+                <%=session.cart.totalQty %>
+                </span>
+              <% }%>
+  						<div>Cart</div>
+  					</div>
+  				</div>
+  			</a>
+        <% if( typeof user != 'undefined'){ %>
+  			<div class="widget-header">
+  				<a href="/users/login" data-toggle="dropdown"  data-offset="20,10">
+  					<div class="icontext">
+  						<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
+  						<div class="text-wrap">
+  							<small>Welcome</small>
+  							<div><%= user.firstname %> <i class="fa fa-caret-down"></i> </div>
+  						</div>
+  					</div>
+  				</a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/users/dashboard">Dashboard</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/users/logout">Logout</a>
+  				</div> <!--  dropdown-menu .// -->
+  			</div>  <!-- widget-header .// -->
+        <% }else{%>
+          <div class="widget-header">
+    				<a href="/users/login"  data-offset="20,10">
+              <div class="icontext">
+  						<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
+  						<div class="text-wrap">
+  							<small>Sign in | Join</small>
+  							<div>My account  </div>
+  						</div>
+  					</div>
+    				</a>
+    			</div>  <!-- widget-header .// -->
+          <%} %>
+  		</div> <!-- widgets-wrap.// -->
+  	</div> <!-- col.// -->
+  </div> <!-- row.// -->
+  	</div> <!-- container.// -->
+  </section> <!-- header-main .// -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+  <div class="container">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+<b style="color:#f9f9f9;" class="cnt-sm">for surport call &nbsp; <i class="fa fa-phone"></i> +233 024 700 4668</b>
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/pages/store-front">STORE-FRONT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/payment">PAYMENT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tutorials">TUTORIALS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about" >ABOUT AUTHOR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/faq" >FAQ'S</a>
+        </li>
+      </ul>
+    </div> <!-- collapse .// -->
+    <b style="color:#f9f9f9;" class="cnt-bg">for surport call &nbsp; <i class="fa fa-phone"></i> +233 024 700 4668</b>
+  </div> <!-- container .// -->
+</nav>
+
+</header> <!-- section-header.// -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content bg padding-y">
+<div class="container">
+  <nav class="mb-3">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="/Search">Search Results</li>
+  </ol>
+  </nav>
+
+<div class="row">
+	<aside class="col-sm-3">
+
+<div class="card card-filter">
+	<article class="card-group-item">
+		<header class="card-header">
+			<a class="" aria-expanded="true" href="#" data-toggle="collapse" data-target="#collapse22">
+				<i class="icon-action fa fa-chevron-down"></i>
+				<h6 class="title">By Category</h6>
+			</a>
+		</header>
+		<div style="" class="filter-content collapse show" id="collapse22">
+			<div class="card-body">
+
+				<ul class="list-unstyled list-lg">
+          <% for (var i = 0; i < itemcat.length; i++) { %>
+            <li><a href="/Search/q?searchbox=<%= itemcat[i].item_category %>&&SearchFilter=Items"><%= itemcat[i].item_category %><span class="float-right badge badge-light round"></span> </a></li>
+        <%  }  %>
+				</ul>
+			</div> <!-- card-body.// -->
+		</div> <!-- collapse .// -->
+	</article> <!-- card-group-item.// -->
+</div> <!-- card.// -->
+
+
+	</aside> <!-- col.// -->
+	<main class="col-sm-9">
+
+<% if( typeof(SearchFilter) != undefined && (SearchFilter == 'Items')){ %>
+  <% if (searchResult){ %>
+  <% for(var i=0; i< searchResult.length; i++){ %>
+<article class="card card-product">
+	<div class="card-body">
+	<div class="row">
+		<aside class="col-sm-3">
+			<div class="img-wrap"><img src="../../images/<%=searchResult[i].imagePath_one%>"></div>
+		</aside> <!-- col.// -->
+		<article class="col-sm-6">
+				<h4 class="title"> <%=searchResult[i].title%></h4>
+				<div class="rating-wrap  mb-2">
+					<div class="label-rating">154 orders </div>
+				</div> <!-- rating-wrap.// -->
+				<p> <%=searchResult[i].description%></p>
+
+				<dl class="dlist-align">
+				  <dt>Delivery</dt>
+				  <dd>VIP, Ford, Glozel</dd>
+				</dl>  <!-- item-property-hor .// -->
+
+		</article> <!-- col.// -->
+		<aside class="col-sm-3 border-left">
+			<div class="action-wrap">
+				<div class="price-wrap h4">
+					<span class="price"> Ghc <%=searchResult[i].price%> </span>
+				</div> <!-- info-price-detail // -->
+				<p>
+          <a href="/pages/store-front/product_detail/p/?q=<%= searchResult[i].id %>" class="btn btn-bg btn-primary float-right" >Order Now</a>
+          <button type="button" id="<%= searchResult[i].id %>" class="btn btn-bg btn-warning float-right addtocart" style="margin-right:10px"><i class="fa fa-shopping-cart"></i></button>
+				</p>
+			</div> <!-- action-wrap.// -->
+		</aside> <!-- col.// -->
+	</div> <!-- row.// -->
+	</div> <!-- card-body .// -->
+</article> <!-- card product .// -->
+<% } %>
+<% } %>
+<% if(searchResult.length < 1){ %> <h1 style="text-align:center">Item not found</h1> <% } %>
+<% } %>
+
+<% if( typeof(SearchFilter) != undefined && (SearchFilter == 'Videos')){ %>
+  <article class="card " style="margin-bottom:20px">
+  	<div class="card-body">
+                  <ul class="list-unstyled video-list-thumbs row">
+                    <% if (Vid_searchResult){ %>
+                      <% for(var i=0; i< Vid_searchResult.length; i++){ %>
+                        <li class="col-lg-4 col-sm-4 col-xs-4">
+                          <a href="/tutorials/view/<%= Vid_searchResult[i].id %>" title="Claudio Bravo, antes su debut con el Barça en la Liga">
+                            <img src="<%= Vid_searchResult[i].videoImg_url %>" alt="turial video preview" class="img-responsive" height="130px" style="width:100%"/>
+                            <h2><%= Vid_searchResult[i].short_desc %></h2>
+                            <i class="fa fa-play-circle-o"></i>
+                          </a>
+                        </li>
+                      <% } %>
+                    <% } %>
+                  </ul>
+              </div>
+            </article>
+  <%}%>
+<!-- pagination -->
+<% if( typeof(SearchFilter) != undefined && typeof(searchResult) != undefined ){ %>
+
+                <!-- pagination -->
+                <nav aria-label="Page navigation ">
+                <ul class="pagination justify-content-center" style="bottom:0">
+                  <% if (current == 1) { %>
+                      <li class="page-item disabled"><a class="page-link">First</a></li>
+                  <% } else { %>
+                      <li class="page-item"><a class="page-link" href="/Search/q/1_<%= searchitem %>&<%= SearchFilter %>">First</a></li>
+                  <% } %>
+                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <% if (i !== 1) { %>
+                      <li class="page-item disabled"><a class="page-link" >...</a></li>
+                  <% } %>
+                  <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                      <% if (i == current) { %>
+                          <li class="page-item active"><a class="page-link" ><%= i %></a></li>
+                      <% } else { %>
+                          <li class="page-item"><a class="page-link"  href="/Search/q/<%= i %>_<%= searchitem %>&<%= SearchFilter %>"><%= i %></a></li>
+                      <% } %>
+                      <% if (i == Number(current) + 4 && i < pages) { %>
+                          <li class="page-item disabled"><a class="page-link" >...</a></li>
+                      <% } %>
+                  <% } %>
+                  <% if (current == pages) { %>
+                      <li class="page-item disabled"><a class="page-link">Last</a></li>
+                  <% } else { %>
+                      <li class="page-item"><a class="page-link" href="/Search/q/<%= pages %>_<%= searchitem %>&<%= SearchFilter %>">Last</a></li>
+                  <% } %>
+              </ul>
+            </nav>
+          <%}%>
+<!-- /end pagination  -->
+
+	</main> <!-- col.// -->
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<% include ../partials/footer %>

@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
+
+  <title>Botics Technologies</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- Bootstrap4 files-->
+  <script src="../../../../javascripts/bootstrap.bundle.min.js" type="text/javascript"></script>
+  <link href="../../../../stylesheets/bootstrap.css?v=1.0" rel="stylesheet" type="text/css"/>
+
+  <!-- Font awesome 5 -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- plugin: fancybox  -->
+  <script src="../../../../plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
+  <link href="../../../../plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
+
+  <!-- plugin: owl carousel  -->
+  <link href="../../../../plugins/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="../../../../plugins/owlcarousel/assets/owl.theme.default.css" rel="stylesheet">
+  <script src="../../../../plugins/owlcarousel/owl.carousel.min.js"></script>
+
+  <!-- custom style -->
+  <link href="../../../../stylesheets/ui.css?v=1.0" rel="stylesheet" type="text/css"/>
+  <link href="../../../../stylesheets/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+  <link href="../../../../stylesheets/style.css" rel="stylesheet" type="text/css"/>
+  <!-- custom javascript -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../../../../javascripts/script.js" type="text/javascript"></script>
+</head>
+<body>
+<header class="section-header">
+  <section class="header-main">
+  	<div class="container">
+  <div class="row align-items-center">
+  	<div class="col-lg-3 col-sm-4">
+  	<div class="brand-wrap">
+  		<a href="/"><img class="logo" src="../../../../images/one.png"></a>
+  		<!-- <h2 class="logo-text">BOTICS TECHNOLOGIES</h2> -->
+  	</div> <!-- brand-wrap.// -->
+  	</div>
+    <div class="col-lg-4 col-xl-5 col-sm-8">
+  			<form action="/Search/q" method="get" class="search-wrap">
+  				<div class="input-group w-100">
+  				    <input type="text" name="searchbox" class="form-control" id="searchbox" style="width:55%;" placeholder="Search item or tutorial">
+              <select class="custom-select"  id="SearchFilter" name="SearchFilter">
+                <option value="Items" > Items </option>
+                <option value="Videos"> Videos </option>
+  					</select>
+  				    <div class="input-group-append">
+  				      <button class="btn btn-primary" type="submit">
+  				        <i class="fa fa-search"></i>
+  				      </button>
+  				    </div>
+
+
+  			    </div>
+  			</form> <!-- search-wrap .end// -->
+  	</div> <!-- col.// -->
+    <div class="col-lg-5 col-xl-4 col-sm-12">
+  		<div class="widgets-wrap float-right">
+  			<a href="/pages/store-front/p/shopping-cart" class="widget-header mr-3">
+  				<div class="icontext">
+  					<div class="icon-wrap"><i class="icon-sm round border fa fa-shopping-cart"></i></div>
+  					<div class="text-wrap">
+              <% if( typeof session.cart != 'undefined' && session.cart != ''){ %>
+                <span class="small badge badge-danger">
+                <%=session.cart.totalQty %>
+                </span>
+              <% }%>
+  						<div>Cart</div>
+  					</div>
+  				</div>
+  			</a>
+        <% if( typeof user != 'undefined'){ %>
+  			<div class="widget-header">
+  				<a href="/users/login" data-toggle="dropdown"  data-offset="20,10">
+  					<div class="icontext">
+  						<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
+  						<div class="text-wrap">
+  							<small>Welcome</small>
+  							<div><%= user.firstname %> <i class="fa fa-caret-down"></i> </div>
+  						</div>
+  					</div>
+  				</a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/users/dashboard">Dashboard</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/users/logout">Logout</a>
+  				</div> <!--  dropdown-menu .// -->
+  			</div>  <!-- widget-header .// -->
+        <% }else{%>
+          <div class="widget-header">
+    				<a href="/users/login"  data-offset="20,10">
+              <div class="icontext">
+  						<div class="icon-wrap"><i class="icon-sm round border fa fa-user"></i></div>
+  						<div class="text-wrap">
+  							<small>Sign in | Join</small>
+  							<div>My account  </div>
+  						</div>
+  					</div>
+    				</a>
+    			</div>  <!-- widget-header .// -->
+          <%} %>
+  		</div> <!-- widgets-wrap.// -->
+  	</div> <!-- col.// -->
+  </div> <!-- row.// -->
+  	</div> <!-- container.// -->
+  </section> <!-- header-main .// -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+  <div class="container">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav" aria-controls="main_nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+<b style="color:#f9f9f9;" class="cnt-sm">for surport call &nbsp; <i class="fa fa-phone"></i> +233 024 700 4668</b>
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">HOME</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/pages/store-front">STORE-FRONT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/payment">PAYMENT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tutorials">TUTORIALS</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/about" >ABOUT AUTHOR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/faq" >FAQ'S</a>
+        </li>
+      </ul>
+    </div> <!-- collapse .// -->
+    <b style="color:#f9f9f9;" class="cnt-bg">for surport call &nbsp; <i class="fa fa-phone"></i> +233 024 700 4668</b>
+  </div> <!-- container .// -->
+</nav>
+
+</header> <!-- section-header.// -->
+<section class="section-content bg padding-y-sm">
+<div class="container">
+<nav class="mb-3">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="/about">About Author</li>
+</ol>
+</nav>
+
+<div class="row">
+<div class="col-xl-10 col-md-9 col-sm-12">
+
+
+<main class="card">
+  <div class="card-body">
+    <div class="row">
+              <div class="col-md-4">
+                <img class="mr-3 img-thumbnail" src="images/founder1.jpg" alt="Responsive image" width="400px">
+                <figcaption class="figure-caption text-center" style="font-size:24px">
+                  <a href="https://web.facebook.com/sammy.oduro.7" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                  <a href="https://twitter.com/IM_SAMMYODURO" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                  <a href="https://www.linkedin.com/in/samueloduro" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                </figcaption>
+                <div style="text-align:center;margin:20px 0px;">
+                  <h5>Samuel Oduro</h5>
+                  <i>C.E.O & founder Botics Technologies</i><br> <h6>( <i class="fa fa-star text-warning"></i> Entreprenuer & Programmer )</h6>
+                </div>
+              </div>
+              <div class="col-md-8 header-bg">
+                <h4 class="mt-0 mb-1 ">Samuel Oduro</h4>
+                <p class="text-muted">
+                Samuel Oduro grew up on the outskirt of Kumasi in a town called Atonsu off the Lake Bosomtwe road in the Ashanti region.
+                 He recieved his Bachelor degree in Computer Science from Kwame Nkrumah University of Science and Technology (KNUST) in Kumasi.
+                 Samuel had his national service at Kumasi Senior High Technical School (KSTS) at Patasi/ksi where he taught as a teacher.
+                 A year after his degree,he started working with Black Star Energy Limited, a subsidiary of Energicity in the United States which is into
+                 rural area electrification using solar. He was a Metering Engineer and asisted his team in building smart energy meters which monitors
+                 the energy consumption of their subscribed customers  connected to their power grid. <br>  He has recieved many accolades
+               from institutions like Kwame Nkrumah University of Science and Technology(KNUST),Garden City University and Christian Service University
+             where he teaches undergraduates and postgraduates students on IoT. </p>
+
+                 <p class="text-muted">His enthusiasm in electronics and Internet of Things motivated him to invent a device for monitoring gas stations
+                   activities which he used as his final year project at KNUST. This device is mounted on fuel tanks with volumes of fuel to read it's level and equivalent
+                 litres, and then sends the data to a centralized server for remote access. The device is in stagging area and will soon be in production.
+
+                  <!-- Samuels' life after school was influenced tremendously by some of the corpoarate organisations
+                 he had internships with.The skills he had from these organisations urged him to dig deeper into electronic
+                 hardware and also tried to find out more about how these microcontrollers works.  -->
+               </p>
+
+                 <p class="text-muted">
+                 Samuel was motivated to build this web portal to help, assist and to teach students,
+                 programmers and novices in the world of Internet of Things(IoT), on how to explore the power of IoT in the global world.
+                 This urged him to provide all the available resources needed for an individual to equip him/herself in the world of IoT.
+                </p>
+              </div>
+          </div>
+  </div>
+</main> <!-- card.// -->
+
+<!-- PRODUCT DETAIL -->
+<article class="card mt-3">
+	<div class="card-body">
+    <div class="row">
+              <div class="col-md-4">
+                <img class="mr-3 img-thumbnail" src="images/founder2.jpg" alt="Responsive image" width="400px">
+                <figcaption class="figure-caption text-center" style="font-size:24px">
+                  <a href="https://web.facebook.com/odlabenonline" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                  <a href="https://twitter.com/odlabenonline" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                  <a href="https://www.linkedin.com/in/odlabenonline/" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                </figcaption>
+                <div style="text-align:center;margin:20px 0px;">
+                  <h5>Benjamin Odoi-Lartey</h5>
+                  <i class="text-muted">Co-founder Botics Technologies</i><br> <h6>( <i class="fa fa-star text-warning"></i> Lead Researcher )</h6>
+                </div>
+              </div>
+              <div class="col-md-8 header-bg">
+                <h4 class="mt-0 mb-1 ">Benjamin Odoi-Lartey</h4>
+                <p class="text-muted">
+                Benjamin Odoi-Lartey happens to be passionate about computers from his teenage. He was born and raised in Kumasi where he has had all his formal education. He attended Kumasi High School where he pursued a Business programme but his passion for computers landed him in University of Education Winneba,
+                 Kumasi where he read B.Ed Information Technology and passed out as a professional teacher. Throughout his college education he took to his passion in computer hardware and networking which sort to provide him with a partime job around the field.</p>
+                <p class="text-muted"> He has a whole year teaching experience as a Teaching Assistant with the College of Technology Education in Kumasi where he demonstrated not only to undergraduates but also postgraduates. He also has a proven record of taking two consecutive batches of B.E.C.E candidates under his tutorship in
+                   Information Communication Technology (ICT) where the students passed with a 100% distinction.</p>
+
+                 <p class="text-muted">Benjamin also holds a Master’s Degree in Information Technology from Kwame Nkrumah University of Science and Technology where he currently works with the Computer Science Department. His love for the Internet of Things pushed him to research into the Improvement of Agriculture Production using Internet of Things and Open Source Technology. He has attended a couple of International Conferences and Trainings in the Technology space. Prominent among these are BlockChain Conference 2017 in Accra - Ghana, Advance ICT Training Camp (AICTT) 2015 in The Gambia and Africa Open Data Conference (AODC) 2017 where I held a section on “Then Internet of Things”.
+                </p>
+                <p class="text-muted">
+                  Benjamin has a published paper on Internet of Things in Agriculture with International Journal of Computer Applications (IJCA) and beyond his first and second degree holds certifications in spaces like Cybrary CompTIA A+ and Linux, Oracle Cloud 101, BigData and The Internet of Things and tons of certificates from MOOCs like Coursera and Edx.
+He is a co-founder of Botics Technologies and serves as a Lead Research, an advisor and consultant with his expertise in the Internet of Things.
+                </p>
+              </div>
+          </div>
+
+	</div> <!-- card-body.// -->
+</article> <!-- card.// -->
+
+<!-- PRODUCT DETAIL .// -->
+
+</div> <!-- col // -->
+<aside class="col-xl-2 col-md-3 col-sm-12">
+<div class="card">
+	<div class="card-header">
+	    For Support
+	</div>
+	<div class="card-body small">
+		 <b>Call <i class="fa fa-phone"></i> +233 247 004 668</b>
+		 <hr>
+     Please contact with us if you have any questions. <br> We are available from<br>
+     Mondays - Saturdays <br> 9:00 AM - 5:00 PM.
+	</div> <!-- card-body.// -->
+</div> <!-- card.// -->
+<div class="card mt-3">
+	<div class="card-header">
+	    You may like
+	</div>
+	<div class="card-body row">
+    <% for (var i = 0; i < product.length; i++) { %>
+<div class="col-md-12 col-sm-3">
+	<figure class="item border-bottom mb-3">
+			<a href="/pages/store-front/product_detail/p/?q=<%= product[i]._id %>" class="img-wrap"> <img src="../../images/<%= product[i].imagePath_one %>" class="img-md"></a>
+			<figcaption class="info-wrap">
+				<a href="/pages/store-front/product_detail/p/?q=<%= product[i]._id %>" class="title"><%= product[i].title %></a>
+				<div class="price-wrap mb-3">
+					<span class="price-new">Ghc <%= product[i].price %></span>
+				</div> <!-- price-wrap.// -->
+			</figcaption>
+	</figure> <!-- card-product // -->
+</div> <!-- col.// -->
+<% } %>
+	</div> <!-- card-body.// -->
+</div> <!-- card.// -->
+</aside> <!-- col // -->
+</div> <!-- row.// -->
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION CONTENT .END// ========================= -->
+
+<!-- ========================= FOOTER ========================= -->
+<% include ../partials/footer %>
+<!-- ========================= FOOTER END // ========================= -->
+
+
+</body>
+</html>

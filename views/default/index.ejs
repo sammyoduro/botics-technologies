@@ -1,0 +1,444 @@
+<% include ../partials/header %>
+
+<!-- ========================= SECTION MAIN ========================= -->
+<!-- ========================= FOOTER ========================= -->
+<section class="section-main bg padding-top-sm">
+<div class="container">
+<!-- modal -->
+ <div class="modal fade" id="proposalsubmit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	 <div class="modal-dialog modal-dialog-centered" role="document">
+		 <div class="modal-content">
+			 <div class="modal-header">
+				 <h5 class="modal-title" id="exampleModalCenterTitle">Uploading proposal...</h5>
+
+			 </div>
+			 <div class="modal-body">
+				 <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+			 </div>
+		 </div>
+	 </div>
+ </div>
+<!-- modal end -->
+<div class="row-sm">
+	<div class="col-md-8">
+<!-- ================= video intro ================= -->
+<div class="video-responsive">
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/-3_pAazPExA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<!-- ============== video intro .end // ============= -->
+
+	</div> <!-- col.// -->
+	<aside class="col-md-4">
+<% for (var i = 0; i < product.length; i++) { %>
+<div class="card mb-3">
+<figure class="itemside">
+	<div class="aside"><div class="img-wrap p-2 border-right"><img class="img-sm" src="../../images/<%= product[i].imagePath_one %>"></div></div>
+	<figcaption class="text-wrap align-self-center">
+		<h6 class="title"><%= product[i].title %></h6>
+     <a href="/pages/store-front/product_detail/p/?q=<%= product[i]._id %>"> more info </a>
+	</figcaption>
+</figure>
+</div> <!-- card.// -->
+<% } %>
+	</aside>
+</div>
+</div> <!-- container .//  -->
+</section>
+<section class="section-content padding-y-sm bg">
+<div class="container ">
+<div class="row ">
+  <div class="col-lg-12 homepage_img" >
+    <div class="overlay-txt">
+      <h1>At Botics Technologies we impact <span style="color:#007bff">Innovation!</span> </h1>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<!-- ========================= NEEDS HELP ON IOT PROJECT ========================= -->
+<section class="section-content padding-y-sm bg">
+<div class="container ">
+<div class="row ">
+  <div class="col-lg-4 " style="margin-bottom:10px">
+    <div class="card">
+      <header class="section-heading" style="padding:10px;text-align:center">
+      	<h4 class="h text-uppercase">Needs help on your IoT project?</h4>
+      </header>
+      <div class="col-lg-12  homepage-icon">
+        <i class="fa fa-sign-language"></i>
+        <!-- <img src="https://image.ibb.co/cHgKnU/Work_Section2_freelance_img2.png" class="rounded-circle img-fluid" alt=""/> -->
+      </div>
+      <div class="col-lg-12">
+        <h4 class="subheading"  style="text-align: justify;">Botics technologies is a great place to get your students projects done.</h4>
+
+  			<p class="text-muted" style="text-align: justify;">
+                  At Botics technologies, we assist Post graduate and Undergraduate students in executing their final year projects on internet of things(IoT).
+                  We also provide instructional and demonstrational videos on the components which are used in building these projects which also makes
+                  it easy for newbies in programming to also learn and build their own project. </p>
+                  <p class="text-muted">
+                    We believe there is so much to do when it comes to final year projects and students find it difficult to combine both project delivery and
+                    project documentation.  Our hands on deck programmers are ready to roll up their sleeves for you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4" style="margin-bottom:10px">
+    <div class="card" style="padding-bottom: 150px;">
+      <header class="section-heading " style="padding:10px;text-align:center">
+      	<h4 class="h text-uppercase">Do you know how to work on IoT project?</h4>
+      </header>
+      <div class="col-lg-12  homepage-icon">
+        <i class="fa fa-pencil-square-o"></i>
+        <!-- <img src="https://image.ibb.co/dDW27U/Work_Section2_freelance_img1.png" class="rounded-circle img-fluid" alt=""/> -->
+      </div>
+      <div class="col-lg-12">
+        <h4 class="subheading" style="text-align: justify;">We provide you with instructional and demonstrational videos.</h4>
+
+  			<p class="text-muted"  style="text-align: justify;">
+          We teach students and newbies with our instructional and demonstrational videos from scratch on Arduino and Raspberry Pi.
+          Newbies are adviced to use our instructional videos to build their own project. This will help students understand the beauty of IoT
+          so they can be motivated to build their own project.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-lg-4">
+    <div class="card" style="padding-bottom: 144px;">
+      <header class="section-heading " style="padding:10px;text-align:center">
+      	<h4 class="h text-uppercase">Is IoT project components hard to find?</h4>
+      </header>
+      <div class="col-lg-12 homepage-icon">
+        <i class="fa fa-crosshairs"></i>
+        <!-- <img src="https://image.ibb.co/ctSLu9/Work_Section2_freelance_img3.png" class="rounded-circle img-fluid" class="rounded-circle img-fluid" alt=""/> -->
+      </div>
+      <div class="col-lg-12">
+        <h4 class="subheading" style="text-align: justify;"> With our project catalog, students have a vast components to choose from. </h4>
+
+  			<p class="text-muted" style="text-align: justify;">
+          Students are encouraged to use our Store-front section to purchace all their project components.
+          Our Store-front portal contains all required project components including Sensors,Actuators and micro-controllers (Arduino and Raspberry pi).
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= NEEDS HELP ON IOT PROJECT END// ========================= -->
+
+<!-- ========================= Submit Proposal ========================= -->
+<section class="section-content padding-y-sm bg">
+<div class="container">
+
+<header class="section-heading heading-line">
+	<h4 class="title-section bg text-uppercase">Submit proposal</h4>
+</header>
+
+<div class="card">
+<div class="card-body">
+	<div class="row no-gutters">
+		<div class="col-md-5 ">
+			<div class="alert alert-info" role="alert" >
+            <h4 class="alert-heading">Notice!</h4>
+            <h5>Projects worked on</h5>
+            <ul>
+              <li>Arduio projects.</li>
+              <li>Raspberry pi projects.</li>
+              <li>Websites that interacts with micro-controllers.</li>
+            </ul>
+            <h5>Programming tools</h5>
+            <p>Python, Node js, PHP, C programming, Javascript, JQuery, CSS and HTML</p>
+            <hr>
+            <p class="mb-0 alert-warning"> <b>NOTE:</b> We do not work on stand alone websites like <br><ul>
+              <li>School management System</li>
+              <li>Hospital management System</li>
+            </ul> </p>
+          </div>
+		</div> <!-- col.// -->
+		<div class="col-md-7">
+			<form method="post" id="data"  encType="multipart/form-data">
+				<div class="col-lg-12">
+					<div class="form-row">
+						<div class="col-lg-6 col-sm-12  form-group">
+							<label for="">Proposal topic</label>
+							<input type="text" name="proposal_topic" id="proposal_topic" placeholder="Enter proposal topic" class="form-control">
+							<p class="err_msg" id="proposal_topic_errMsg"></p>
+						</div> <!-- form-group end.// -->
+						<div class="col-lg-6 col-sm-12  form-group">
+							<label for="">Fullname</label>
+							<input type="text" name="fullname" id="fullname" placeholder="Enter your fullname" class="form-control">
+							<p class="err_msg" id="fullname_errMsg"></p>
+						</div> <!-- form-group end.// -->
+					</div>
+
+					<div class="form-row">
+						<div class="col-lg-6 col-sm-12  form-group">
+							<label for="">Email</label>
+							<input type="text" name="email" id="email" placeholder="Enter your email" class="form-control">
+							<p class="err_msg" id="email_errMsg"></p>
+						</div> <!-- form-group end.// -->
+						<div class="col-lg-6 col-sm-12  form-group">
+							<label for="">Phone</label>
+              <input type="text" name="phone_num" id="phone_num" placeholder="Enter phone number here" class="form-control">
+              <p class="err_msg" id="phone_errMsg"></p>
+						</div> <!-- form-group end.// -->
+					</div>
+
+					<div class="form-row">
+						<div class="col-lg-6 col-sm-12  form-group">
+							<label>Upload Your proposal in PDF<p class="err_msg" id="file_errMsg"></p></label>
+							<input type="file" name="proposal_file" id="proposal_file" class="form-control" multiple="">
+						</div> <!-- form-group end.// -->
+						<div class="col-lg-6 col-sm-12  form-group">
+							<label for="">Description</label>
+              <textarea name="descriptopn" id="descriptopn" rows="4" cols="80" placeholder="message goes here" class="form-control"></textarea>
+              <p class="err_msg" id="Description_errMsg"></p>
+						</div> <!-- form-group end.// -->
+					</div>
+        </div>
+        <div class="col-lg-12">
+                <input type="submit" name="submit_proposal" value="Submit" class="btn btn-warning" id="submit_proposal" style="float:right">
+        </div>
+			</form>
+		</div> <!-- col.// -->
+	</div> <!-- row.// -->
+</div>
+
+</div> <!-- card.// -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= Submit proposal END// ========================= -->
+<!-- ========================= CONTACT US ========================= -->
+<section class="section-request bg padding-y-sm">
+<div class="container">
+<header class="section-heading heading-line">
+	<h4 class="title-section bg text-uppercase">Contact Us</h4>
+</header>
+
+<div class="row">
+	<div class="col-md-8 col-sm-12">
+		<div id="map"></div>
+	</div> <!-- col // -->
+	<div class="col-md-4">
+
+<div class="card card-body">
+	<h5 class="title py-4">Send us a mail now</h5>
+		<div class="form-group">
+			<input type="text" class="form-control" id="contactususername" placeholder="Enter fullname">
+      <i id="contactusername_err" class="pull-left text-danger"></i>
+		</div>
+		<div class="form-group">
+			<input type="email" class="form-control" id="contactusemail" placeholder="Enter email">
+      <i id="contactusemail_err" class="pull-left text-danger"></i>
+		</div>
+		<div class="form-group text-muted">
+			<i id="contactusmsg_err" class="pull-left text-danger"></i>
+      	<textarea class="form-control" id="contactusmsg" placeholder="Message" style="height:71px"></textarea>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-warning"  id="contactusbtn">Send</button>
+		</div>
+</div>
+
+	</div> <!-- col // -->
+</div><!-- row // -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= CONTACT US .END// ========================= -->
+<!-- ========================= FAQ ========================= -->
+<section class="section-content padding-y-sm bg">
+<div class="container">
+
+<header class="section-heading heading-line">
+	<h4 class="title-section bg text-uppercase">FAQ'S</h4>
+</header>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card card-body ">
+			<h4>Poject proposal</h4>
+			<div class="accordion md-accordion accordion-2" id="accordian" role="tablist" aria-multiselectable="true">
+
+             <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordian" href="#collapse1"
+                    aria-expanded="false" aria-controls="collapse1">
+                    <h6 class="mb-0 white-text text-uppercase font-thin">
+                      Q. WHAT TYPE OF PROJECT DO WE WORK ON ?<i class="more-less fa fa-angle-down rotate-icon"></i>
+                    </h6>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordian">
+                  <div class="card-body mb-1 rgba-grey-light white-text">
+                    <p class="text-muted"> Currently we only work on <b>#Arduino</b> and <b>#Raspberry Pi based projects</b>. </p>
+                    <p class="text-muted"><b>Upcoming projects: </b> #Content Management System including <br/>
+                      <ul>
+                        <li class="text-muted"><b>Web applcations</b></li>
+                        <li class="text-muted"><b>Desktop applications</b></li>
+                        <li class="text-muted"><b>IOS applications</b></li>
+                        <li class="text-muted"><b>Android applications</b></li>
+                      </ul>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion card -->
+             <!-- Accordion card -->
+       <div class="card">
+         <!-- Card header -->
+         <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading2">
+           <a class="collapsed" data-toggle="collapse" data-parent="#accordian" href="#collapse2"
+             aria-expanded="false" aria-controls="collapse2">
+             <h6 class="mb-0 white-text text-uppercase font-thin">
+               Q. HOW DO I SUBMIT MY PROPOSAL FOR PERUSAL ? <i class="more-less fa fa-angle-down rotate-icon"></i>
+             </h6>
+           </a>
+         </div>
+
+         <!-- Card body -->
+         <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2" data-parent="#accordian">
+           <div class="card-body mb-1 rgba-grey-light white-text">
+             <p class="text-muted">Use the Submit proposal section on the homepage to submit your proposal document. <br>
+                      Fill in the textfields with your user details then upload your proposal document in <b>.PDF</b> format and
+                      then click on the submit button to submit. <br>
+                      After submission, a proposal tracking code will be sent to the email you provided when filling your user details.
+                      Keep your <b>proposal tracking code </b> safe as it will be used for reference to your project execution.
+                     </p>
+           </div>
+         </div>
+       </div>
+       <!-- Accordion card -->
+
+              <!-- Accordion card -->
+        <div class="card">
+
+          <!-- Card header -->
+          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading3">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordian" href="#collapse3"
+              aria-expanded="false" aria-controls="collapse3">
+              <h6 class="mb-0 white-text text-uppercase font-thin">
+                Q. HOW DO I KNOW IF MY SUBMITTED PROPOSAL IS SEEN ? <i class="more-less fa fa-angle-down rotate-icon"></i>
+              </h6>
+            </a>
+          </div>
+
+          <!-- Card body -->
+          <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordian">
+            <div class="card-body mb-1 rgba-grey-light white-text">
+              <p class="text-muted">Within <b>24 HRS</b> our team will contact you via email with project requirement and it's estimated cost.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Accordion card -->
+        <!-- Accordion card -->
+  <div class="card">
+    <!-- Card header -->
+    <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading4">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordian" href="#collapse4"
+        aria-expanded="false" aria-controls="collapse4">
+        <h6 class="mb-0 white-text text-uppercase font-thin">
+          Q. HOW LONG DOES IT TAKES A PROJECT TO GET DONE ?<i class="more-less fa fa-angle-down rotate-icon"></i>
+        </h6>
+      </a>
+    </div>
+
+    <!-- Card body -->
+    <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="heading4" data-parent="#accordian">
+      <div class="card-body mb-1 rgba-grey-light white-text">
+        <p class="text-muted">It depends on the project requirement, if our Store-front is out of stock on a component needed for the <br>
+          project, it needs to be purchased outside. Hence, atmost <b>three(3) months</b> for a project to get done.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Accordion card -->
+          <!-- Accordion card -->
+    <div class="card">
+
+      <!-- Card header -->
+      <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading5">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordian" href="#collapse5"
+          aria-expanded="false" aria-controls="collapse5">
+          <h6 class="mb-0 white-text text-uppercase font-thin">
+            Q. DO YOU ENGAGE STUDENTS IN PROJECT EXECUTION ? <i class="more-less fa fa-angle-down rotate-icon"></i>
+          </h6>
+        </a>
+      </div>
+
+      <!-- Card body -->
+      <div id="collapse5" class="collapse" role="tabpanel" aria-labelledby="heading5" data-parent="#accordian">
+        <div class="card-body mb-1 rgba-grey-light white-text">
+          <p class="text-muted">It depends on student's preference but ultimately we engage students over remote applications like <br>
+            <b>Teamviewer and GitHub</b> in execution of projects and students pay a token for the tuition service
+             depending on <b>Hrs</b>
+            spent. In event where the student wants to work on his/her own project, purchased project components
+            from our <b>Store-front</b> are been delivered to the student and assistance is given remotely over Teamviewer and GitHub.
+            Tuition calls are done via <b>Skype and Whatsapp</b>.
+             However projects can be done solely by Botics Technologies <b>without any tuition charges</b>.
+          </p>
+          <p><b>Note: remote tuition extensively uses  dedicated internet connection </b>. </p>
+
+        </div>
+      </div>
+    </div>
+    <!-- Accordion card -->
+
+    </div>
+		</div>
+	</div> <!-- col // -->
+</div><!-- row // -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= FAQ END// ========================= -->
+<!-- ========================= FOOTER ========================= -->
+
+<% include ../partials/footer %>
+<!-- ========================= FOOTER END // ========================= -->
+
+<script type="text/javascript">
+
+	// Initialize and add the map
+	function initMap() {
+	  // The location of Uluru 6.673399, -1.567022
+	  var collegeOfScienceKNUST = {lat: 6.673399, lng: -1.567022};
+		var PIWC = {lat:6.677309 , lng:-1.599383}
+	  // The map, centered at Uluru
+	  var map = new google.maps.Map( document.getElementById('map'), {zoom: 13, center: collegeOfScienceKNUST});
+
+		var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(collegeOfScienceKNUST),
+      animation: google.maps.Animation.BOUNCE,
+      map: map
+      });
+			var marker2 = new google.maps.Marker({
+	      position: new google.maps.LatLng(PIWC),
+	      animation: google.maps.Animation.BOUNCE,
+	      map: map
+	      });
+				var infowindow = new google.maps.InfoWindow({
+          content: "BOTICS TECHNOLOGIES <br>COLLEGE OF SCIENCE <br>KNUST branch"
+        });
+				var infowindow2 = new google.maps.InfoWindow({
+          content: "BOTICS TECHNOLOGIES <br> ASOKWA PIWC BRANCH<br>( HEADQUARTERS )"
+        });
+          infowindow.open(map,marker);
+					marker.setMap(map);
+					infowindow2.open(map,marker2);
+          marker2.setMap(map);
+	}
+
+	    </script>
+	    <script async defer
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlNlnEIzSVoUE2PRF79vWaxjx0HyRFFmo&callback=initMap"">
+</script>
+</body>
+</html>
