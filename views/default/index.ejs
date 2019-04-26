@@ -35,6 +35,7 @@
 	<div class="aside"><div class="img-wrap p-2 border-right"><img class="img-sm" src="../../images/<%= product[i].imagePath_one %>"></div></div>
 	<figcaption class="text-wrap align-self-center">
 		<h6 class="title"><%= product[i].title %></h6>
+    <span class="text-muted">GHc <%= product[i].price %></span>
      <a href="/pages/store-front/product_detail/p/?q=<%= product[i]._id %>"> more info </a>
 	</figcaption>
 </figure>
@@ -43,17 +44,6 @@
 	</aside>
 </div>
 </div> <!-- container .//  -->
-</section>
-<section class="section-content padding-y-sm bg">
-<div class="container ">
-<div class="row ">
-  <div class="col-lg-12 homepage_img" >
-    <div class="overlay-txt">
-      <h1>At Botics Technologies we impact <span style="color:#007bff">Innovation!</span> </h1>
-    </div>
-  </div>
-</div>
-</div>
 </section>
 <!-- ========================= NEEDS HELP ON IOT PROJECT ========================= -->
 <section class="section-content padding-y-sm bg">
@@ -408,10 +398,8 @@
 
 	// Initialize and add the map
 	function initMap() {
-	  // The location of Uluru 6.673399, -1.567022
 	  var collegeOfScienceKNUST = {lat: 6.673399, lng: -1.567022};
 		var PIWC = {lat:6.677309 , lng:-1.599383}
-	  // The map, centered at Uluru
 	  var map = new google.maps.Map( document.getElementById('map'), {zoom: 13, center: collegeOfScienceKNUST});
 
 		var marker = new google.maps.Marker({

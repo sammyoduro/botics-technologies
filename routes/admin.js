@@ -280,7 +280,8 @@ var item = new Items({
      description      :itemdescription,
      detailed_description:detailtemdescription,
      price            :itemprice,
-     quantities       :itemQuantity
+     quantities       :itemQuantity,
+     orders           :0
    });
 
    item.save(function (err) {

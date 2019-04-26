@@ -12,7 +12,7 @@ var schema = new Schema({
   detailed_description:{type:String,required:true},
   price            :{type:String,required:true},
   quantities       :{type:String,required:true},
-  orders           :{type:String},
+  orders           :{type:Number},
   feedback         :{type:String}
 });
 

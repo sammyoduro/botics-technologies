@@ -4,7 +4,7 @@ var Product        = require('../models/product');
 var Cart           = require('../models/cart');
 var Order           = require('../models/order');
 var Item_Category  = require('../models/item_category');
-
+var async            = require('async');
 
 
 
@@ -26,7 +26,6 @@ Product
             Item_Category.find({},function (err,itemcat) {
               if (err) return next(err);
               Product.aggregate([{ $sample: { size: 3 } }],function (err,Pshuffle) {
-
               res.render('default/ecommerce', {
                 user:req.user,
                   products: products,
@@ -304,27 +303,54 @@ router.get('/p/ConfirmPayment',isLoggedIn,function (req,res) {
 
 if (status_code == 1) {
 // Successful payment made
-var name  = req.user.firstname+" "+req.user.lastname;
-var order = new Order({
-  user: req.user,
-  cart: cart,
-  address: 'phone: '+ req.user.phone_num+" email: "+ req.user.email,
-  name: name,
-  trans_ref_no: trans_ref_no,
-  order_id: order_id,
-  delivered: "processing order",
-  timestamp: new Date()
-});
+var mycart = cart.generateArray();
+var counter = 0;
+// <<<<<<<<<<<<<<<iner<<<<<<<<<<<<<
+console.log("---------------------------");
+mycart.forEach(function (e) {
+  Product.findById(e.item._id,function (err,prdt) {
+    if (err) throw err;
+    var ordered = +prdt.orders + +e.qty;
 
+    if (prdt.quantities > 0 ) {
+      Product.updateMany({'_id':e.item._id},{$set:{quantities:prdt.quantities-e.qty,orders:ordered}},function (err,callback) {
+        if (err) throw err;
+        console.log('........yes.........');
+        console.log(callback);
+        console.log('.................');
+      })
 
-order.save(function (err,result) {
-  if (err) {console.log(err);}
+    }else{
+       return false;}
+    // console.log(prdt.quantities);
+    // console.log(prdt.orders);
+  })
+counter++;
+})
+// <<<<<<<<<<<<<<<<<<inner<<<<<<<<<<<<<<<<<<<
 
-  req.flash('success','Items purchased successfully!');
-  req.session.cart = "";
-  res.redirect('/users/dashboard');
-});
+if (counter == mycart.length) {
+  var name  = req.user.firstname+" "+req.user.lastname;
+  var order = new Order({
+    user: req.user,
+    cart: cart,
+    address: 'phone: '+ req.user.phone_num+" email: "+ req.user.email,
+    name: name,
+    trans_ref_no: trans_ref_no,
+    order_id: order_id,
+    delivered: "processing order",
+    timestamp: new Date()
+  });
 
+  order.save(function (err,result) {
+    if (err) {console.log(err);}
+
+    req.flash('success','Items purchased successfully!');
+    req.session.cart = "";
+    res.redirect('/users/dashboard');
+  });
+}
+console.log("--------------------------");
 
 }else{
   req.flash('danger',status_message);

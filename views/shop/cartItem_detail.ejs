@@ -40,8 +40,12 @@
 <div class="mb-3">
 	<var class="price h3 text-warning">
 		<span class="currency">Ghc </span><span class="num"><%= product.price %></span>
-	</var>
-	<span>/per item <b class="text-muted">(<%=product.quantities%> items in stock)</b></span>
+	</var> per item
+  <% if (product.quantities < 1 ) { %>
+    <span class="text-muted">(stock: out of Stock)</span>
+  <% }else{ %>
+    <span class="text-muted">(stock: <%= product.quantities %>)</span>
+<%  }%>
 </div> <!-- price-detail-wrap .// -->
 <dl>
   <dt>Description</dt>
@@ -63,9 +67,9 @@
 		</div> <!-- col.// -->
 		<div class="col-sm-7">
       <dl class="dlist-inline">
-			  <dt>Orders</dt>
+			  <dt>Sold</dt>
 			  <dd>
-			  &nbsp; &nbsp;	 99
+			  &nbsp; &nbsp;	 <%= product.orders %>
 			  </dd>
 		</dl>
 		</div> <!-- col.// -->
@@ -116,6 +120,12 @@
 				<a href="/pages/store-front/product_detail/p/?q=<%= shuff_product[i]._id %>" class="title"><%= shuff_product[i].title %></a>
 				<div class="price-wrap mb-3">
 					<span class="price-new">Ghc <%= shuff_product[i].price %></span>
+          <% if (shuff_product[i].quantities < 1) { %>
+            <span class="text-muted">(stock: out of Stock)</span>
+          <% }else{ %>
+            <span class="text-muted">(stock: <%= shuff_product[i].quantities %>)</span>
+        <%  }%>
+
 				</div> <!-- price-wrap.// -->
 			</figcaption>
 	</figure> <!-- card-product // -->

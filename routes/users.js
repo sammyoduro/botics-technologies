@@ -158,7 +158,6 @@ router.get('/dashboard',isLoggedIn, function(req, res) {
       cart = new Cart(order.cart);
       order.items = cart.generateArray();
     });
-    console.log(orders);
     res.render('user/dashboard',{
       user:req.user,
       orders:orders,

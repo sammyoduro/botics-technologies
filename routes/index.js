@@ -14,7 +14,7 @@ var Services           = require('../models/services');
 router.get('/', function(req, res, next) {
   Product.aggregate([{ $sample: { size: 3 } }],function (err,product) {
         if(err){throw err;}
-req.flash('success','wow! it finally worked');
+// req.flash('success','wow! it finally worked');
                   res.render('default/index', {
                      user:req.user,
                      product : product,
@@ -144,10 +144,9 @@ req.flash('success','wow! it finally worked');
 
         transporter.sendMail(mailOptions, function(error, info){
           if (error) {
-            console.log(error);
+            throw error
           }
            else {
-          console.log(info.response);
           messages = email;
           res.send({
               proposal_topic_errMsg:proposal_topic_errMsg,
@@ -290,7 +289,7 @@ router.get('/payment/ConfirmPayment', function(req, res, next) {
     });
 
     services.save(function (err,result) {
-      if (err) {console.log(err);}
+      if (err) {throw err}
 
       req.session.fullname    = "";
       req.session.email       =  "";
@@ -397,7 +396,6 @@ router.get('/featured_videos', function(req, res, next) {
 router.get('/featured_vid/view',function (req,res) {
   var id = req.query.id;
   FeaturedVideo.findById(id,function (err,f_video) {
-    console.log(f_video);
     Product.aggregate([{ $sample: { size: 2 } }],function (err,product) {
       FeaturedVideo
       .find({})
