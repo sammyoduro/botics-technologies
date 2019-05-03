@@ -9,6 +9,8 @@ var nodemailer          = require('nodemailer');
 var dateFormat          = require('dateformat');
 var FeaturedVideo      = require('../models/featured_videos');
 var Services           = require('../models/services');
+const axios = require('axios');
+const sha1  = require('sha1');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -179,8 +181,7 @@ router.post('/payment',function(req,res){
   var pnumber= req.body.pnumber;
   var order_desc=req.body.order_desc;
   var amount=req.body.amount;
-  var illegalChars = /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i;
-
+  var illegalChars = /^\d{10}$/;
   var fnameValidationErr       = "";
   var emailValidationErr       = "";
   var pnumberValidationErr     = "";
@@ -219,15 +220,16 @@ if (check == false) {pnumberValidationErr = 'phone number is not valid';}
       });
   }else{
     // MAKE PAYMENT
-    const axios = require('axios');
-    const sha1  = require('sha1');
+
     var ref     = GenRandomRef();
     var data = {};
 
-    data.app_id     = '2452016064';
-    data.app_key    = 'test';
-    // var URL        = 'https://www.interpayafrica.com/interapi/ProcessPayment';
-    var URL         = 'https://test.interpayafrica.com/interapi/ProcessPayment'
+    data.app_id    = '7453014192';
+    data.app_key    ='76716648';
+    var URL         = 'https://www.interpayafrica.com/interapi/ProcessPayment';
+    // data.app_id    = '2452016064';
+    // data.app_key    ='test';
+    // var URL         = 'https://test.interpayafrica.com/interapi/ProcessPayment';
     data.name       = fname;
     data.email      = email;
     data.pnumber    = pnumber;
@@ -275,8 +277,24 @@ router.get('/payment/ConfirmPayment', function(req, res, next) {
   var trans_ref_no    = req.query.trans_ref_no;
   var order_id        = req.query.order_id;
   var signature       = req.query.signature;
+console.log(req.session.phone_num);
 
   if (status_code == 1) {
+
+    var url = "https://apps.mnotify.net/smsapi?key=7lhCpN4KlFFW0oo1UySwPEtmo&to="+req.session.phone_num+"&msg=Service payment received successfully.\n Payment reference ID is: "+order_id+"&sender_id=Botics Tech";
+    axios.get(url)
+      .then((result)=>{
+        console.log("============= SMS response===============");
+        console.log(result.status);
+        console.log(result.message);
+        console.log("============= End SMS response ===================");
+      })
+      .catch((error)=>{
+        console.log("=============response Error===============");
+        console.log(error.message);
+        console.log("============= End response Error ===================");
+      })
+
     var services = new Services({
       fullname: req.session.fullname,
       email: req.session.email,
@@ -297,7 +315,7 @@ router.get('/payment/ConfirmPayment', function(req, res, next) {
       req.session.payment_description =  "";
       req.session.amount =  "";
       req.flash('success','Services payment made successfully!');
-      res.render('default/payments', { user:req.user});
+      res.redirect('/payment');
     });
 
   }else{

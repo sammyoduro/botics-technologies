@@ -159,6 +159,7 @@
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item active" aria-current="/payment">Make payment</li>
 </ol>
+<%- messages('message',locals) %>
 </nav>
 
 <div class="row">
@@ -188,7 +189,7 @@
 
             </div>
             <div class="col-md-6">
-              <%- messages('message',locals) %>
+
               <form class="" action="/payment" method="post">
                 <h3><strong>User details</strong></h3>
                 <hr>

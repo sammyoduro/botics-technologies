@@ -28,8 +28,8 @@ var opnumber = req.body.opnumber;
 var email = req.body.email;
 var password = req.body.password;
 var rpassword = req.body.rpassword;
-var illegalChars = /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i;
-
+// var illegalChars = /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i;
+var illegalChars = /^\d{10}$/;
 var fnameValidationErr   = "";
 var lnameValidationErr    = "";
 var pnumberValidationErr       = "";

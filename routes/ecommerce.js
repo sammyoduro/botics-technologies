@@ -5,7 +5,8 @@ var Cart           = require('../models/cart');
 var Order           = require('../models/order');
 var Item_Category  = require('../models/item_category');
 var async            = require('async');
-
+const axios = require('axios');
+const sha1 = require('sha1');
 
 
 
@@ -245,18 +246,16 @@ router.post('/p/shopping-cart/checkout',isLoggedIn,function (req,res) {
   }
   var cart = new Cart(req.session.cart);
 
-const axios = require('axios');
-const sha1 = require('sha1');
-
 var cart = new Cart(req.session.cart);
 var ref = GenRandomRef();
 
   var data = {};
-  // data.app_id     = '2452016062';
-  data.app_id     = '2452016064';
-  data.app_key    = 'test';
-  // var URL        = 'https://www.interpayafrica.com/interapi/ProcessPayment';
-  var URL         = 'https://test.interpayafrica.com/interapi/ProcessPayment'
+  // data.app_id     = '2452016064';
+  // data.app_key    = 'test';
+  data.app_id    = '7453014192';
+  data.app_key    ='76716648';
+  var URL         = 'https://www.interpayafrica.com/interapi/ProcessPayment';
+  // var URL         = 'https://test.interpayafrica.com/interapi/ProcessPayment'
   data.name       = req.user.firstname+" "+req.user.lastname;
   data.email      = req.user.email;
   data.pnumber    = req.user.phone_num;
@@ -330,7 +329,25 @@ counter++;
 // <<<<<<<<<<<<<<<<<<inner<<<<<<<<<<<<<<<<<<<
 
 if (counter == mycart.length) {
+
   var name  = req.user.firstname+" "+req.user.lastname;
+  // SEND CONFIRMATION MESSAGE TO USER
+  // ---------- start sms api --------------
+  var url = "https://apps.mnotify.net/smsapi?key=7lhCpN4KlFFW0oo1UySwPEtmo&to="+req.user.phone_num+"&msg=Thank you for your purchase.\n We have received your payment.Come by our office at KNUST Computer Science Department( Dr Ansong ) Office to pick up your Item.\n Your order id is "+order_id+"&sender_id=Botics Shop"
+
+  axios.get(url)
+    .then((result)=>{
+      console.log("============= SMS response===============");
+      console.log(result.status);
+      console.log(result.message);
+      console.log("============= End SMS response ===================");
+    })
+    .catch((error)=>{
+      console.log("=============response Error===============");
+      console.log(error.message);
+      console.log("============= End response Error ===================");
+    })
+  // -----------end sms api ----------------
   var order = new Order({
     user: req.user,
     cart: cart,
