@@ -84,6 +84,7 @@ User.findOne({'email':email},function (err,user) {
     }
     else{
       var hashpwrd =  bcrypt.hashSync(password,bcrypt.genSaltSync(8));
+      console.log("User password: "+password);
       var user = new User({
         firstname:fname,
         lastname:lname,

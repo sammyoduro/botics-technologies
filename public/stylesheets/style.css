@@ -1,9 +1,11 @@
 
 @media (min-width: 768px) {
 .cnt-sm{display: none;}
+
 }
 @media (max-width: 768px) {
 .cnt-bg{display: none;}
+body{padding-top: 10px}
 }
 @media all and (max-width:724px){
   .cnt-bg{display: none;}
