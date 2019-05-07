@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 
         // process proposal submission
     router.post('/',function (req,res) {
-          var proposal_topic = req.body.proposal_topic;
+        var proposal_topic = req.body.proposal_topic;
         var fullname = req.body.fullname;
         var email = req.body.email;
         var phone_num = req.body.phone_num;
@@ -40,13 +40,13 @@ router.get('/', function(req, res, next) {
         var x = genId();
         var prefix = genPrefix();
 
-        var inputFields = {proposal_topic:proposal_topic,fullname:fullname,email:email,phone_num:phone_num,descriptopn:descriptopn,proposal_file:proposal_file,myFile:myFile}
+         var inputFields = {proposal_topic:proposal_topic,fullname:fullname,email:email,phone_num:phone_num,descriptopn:descriptopn,proposal_file:proposal_file,myFile:myFile}
 
-        req.checkBody('proposal_topic','topic is required').notEmpty();
-        req.checkBody('fullname','fullname is required').notEmpty();
-        req.checkBody('email','invalid email').notEmpty().isEmail();
-        req.checkBody('phone_num','phone number is required').notEmpty();
-        req.checkBody('descriptopn','Description must not be empty').notEmpty();
+         req.checkBody('proposal_topic','topic is required').notEmpty();
+         req.checkBody('fullname','fullname is required').notEmpty();
+         req.checkBody('email','invalid email').notEmpty().isEmail();
+         req.checkBody('phone_num','phone number is required').notEmpty();
+         req.checkBody('descriptopn','Description must not be empty').notEmpty();
 
         var proposal_topic_errMsg,fullname_errMsg,email_errMsg,phone_errMsg,Description_errMsg,file_errMsg ="";
         let errors = req.validationErrors();
@@ -94,6 +94,7 @@ router.get('/', function(req, res, next) {
         }
 
         else {
+
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         var FilePath = '/projects/botics-technologies/public/files/'+req.files.proposal_file.name;
           myFile.mv(FilePath,function (err) {
@@ -128,23 +129,28 @@ router.get('/', function(req, res, next) {
         // send mail
 
         var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'mail.privateemail.com',
+        port: 465,
+        secure: true,
         tls:{ rejectUnauthorized: false},
         auth: {
-          user: 'samueloduroonline@gmail.com',
-          pass: 'miccheck1212'
+          user: 'project@boticstechnologies.com',
+          pass: '10student@?'
         }
 
         });
+var template = require('./template_proposal_code');
 
         var mailOptions = {
-        from: 'samueloduroonline@gmail.com',
+        from: '"Botics Technologies" <project@boticstechnologies.com>',
         to: email,
         subject: 'Project proposal tracking code',
-        html: "<header style='text-align:center;background:#007bff;color:#fff;padding:20px'> <h4>Botics Technologies</h4> </header><p>Proposal code: <b>"+doc_tracking+"</b></p>" // html body
+        html: template.output(fullname,doc_tracking) // html body
         };
 
         transporter.sendMail(mailOptions, function(error, info){
+
+
           if (error) {
             throw error
           }
@@ -159,10 +165,11 @@ router.get('/', function(req, res, next) {
               file_errMsg:file_errMsg,
               inputFields:inputFields,
               messages:messages,
-              ck:info.response
+              ck:info.response.indexOf('Ok')
           });
 
         }
+
       });
 
     });
@@ -243,8 +250,6 @@ if (check == false) {pnumberValidationErr = 'phone number is not valid';}
     data.signature = sha1(data.signature);
     axios.post(URL,data)
       .then((result)=>{
-        console.log("=============Incoming response ===============");
-        console.log(result.data);
         if (result.data.status_code == 1) {
 
           req.session.fullname    = fname;
@@ -261,9 +266,7 @@ if (check == false) {pnumberValidationErr = 'phone number is not valid';}
         }
       })
       .catch((error)=>{
-        console.log("=============response Error===============");
-        console.log(error.message);
-        console.log("============= End response Error ===================");
+        throw error.message;
       })
 
   }
@@ -277,22 +280,16 @@ router.get('/payment/ConfirmPayment', function(req, res, next) {
   var trans_ref_no    = req.query.trans_ref_no;
   var order_id        = req.query.order_id;
   var signature       = req.query.signature;
-console.log(req.session.phone_num);
 
   if (status_code == 1) {
 
     var url = "https://apps.mnotify.net/smsapi?key=7lhCpN4KlFFW0oo1UySwPEtmo&to="+req.session.phone_num+"&msg=Service payment received successfully.\n Payment reference ID is: "+order_id+"&sender_id=Botics Tech";
     axios.get(url)
       .then((result)=>{
-        console.log("============= SMS response===============");
         console.log(result.status);
-        console.log(result.message);
-        console.log("============= End SMS response ===================");
       })
       .catch((error)=>{
-        console.log("=============response Error===============");
         console.log(error.message);
-        console.log("============= End response Error ===================");
       })
 
     var services = new Services({

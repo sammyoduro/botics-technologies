@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Bootstrap-ecommerce by Vosidiy">
+
+    <title>Botics Technologies</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../images/favicon.ico">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Bootstrap4 files-->
+    <script src="../../../../javascripts/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <link href="../../../../stylesheets/bootstrap.css?v=1.0" rel="stylesheet" type="text/css"/>
+
+    <!-- Font awesome 5 -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- plugin: fancybox  -->
+    <script src="../../../../plugins/fancybox/fancybox.min.js" type="text/javascript"></script>
+    <link href="../../../../plugins/fancybox/fancybox.min.css" type="text/css" rel="stylesheet">
+
+    <!-- plugin: owl carousel  -->
+    <link href="../../../../plugins/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../../../plugins/owlcarousel/assets/owl.theme.default.css" rel="stylesheet">
+    <script src="../../../../plugins/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- custom style -->
+    <link href="../../../../stylesheets/ui.css?v=1.0" rel="stylesheet" type="text/css"/>
+    <link href="../../../../stylesheets/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+    <!-- <link href="../../../../stylesheets/style.css" rel="stylesheet" type="text/css"/> -->
+    <!-- custom javascript -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="../../../../javascripts/script.js" type="text/javascript"></script> -->
+  </head>
+  <body>
+    <!-- ========================= SECTION MAIN ========================= -->
+    <section class="section-content bg padding-y-sm" style="padding:100px 0">
+    <div class="container">
+      <h1 class="text-danger" style="text-align:center;margin-bottom:50px">THIS PAGE IS OUT OF BOUNDS <br>ONLY STAFF ARE ALLOWED!</h1>
+      <div class="col-md-4 offset-md-4">
+
+    <div class="card">
+    <article class="card-body">
+      <h4 class="card-title mb-4 mt-1">Sign in</h4>
+      <hr>
+      <%- messages('message',locals) %>
+      <form action="/areacode97/admin/outofbound" method="post">
+      <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+         </div>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+      </div> <!-- input-group.// -->
+      </div> <!-- form-group// -->
+      <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+         </div>
+          <input class="form-control" id="password" name="password" placeholder="********" type="password">
+      </div> <!-- input-group.// -->
+      </div> <!-- form-group// -->
+      <div class="form-group">
+        <input type="hidden" name="_csrf" value="<%=csrfToken %>">
+      <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+      </div> <!-- form-group// -->
+      <!-- <p class="text-center">don't have an account click here<a href="/users/register" class="btn">Sign Up</a></p> -->
+      </form>
+    </article>
+    </div> <!-- card.// -->
+        <!-- /.wrap-card -->
+      </div>
+
+    </div><!-- container // -->
+    </section>
+  </body>
+</html>

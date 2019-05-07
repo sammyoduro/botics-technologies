@@ -11,10 +11,9 @@
 
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"> </script>
- <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <!-- Bootstrap4 files-->
 <script src="/javascripts/bootstrap.bundle.min.js" type="text/javascript"></script>
 <link href="/stylesheets/bootstrap.css?v=1.0" rel="stylesheet" type="text/css"/>
@@ -135,19 +134,70 @@
         </li>
         <li class="nav-item"><a href="/areacode97/admin/outofbound/admin/featured_vid" class="nav-link">  FEATURED VIDEOS </a></li>
         <li class="nav-item"><a href="/areacode97/admin/outofbound/admin/frequently_searched" class="nav-link">  FREQUENTLY SEARCHED </a></li>
-        <li class="nav-item active"><a href="/areacode97/admin/outofbound/admin/orders" class="nav-link">  ORDERS </a></li>
-        <li class="nav-item"><a href="/areacode97/admin/outofbound/admin/outofstock" class="nav-link">  OUT OF STOCK </a></li>
+        <li class="nav-item"><a href="/areacode97/admin/outofbound/admin/orders" class="nav-link">  ORDERS </a></li>
+        <li class="nav-item active"><a href="/areacode97/admin/outofbound/admin/outofstock" class="nav-link">  OUT OF STOCK </a></li>
       </ul>
     </div> <!-- collapse .// -->
   </div> <!-- container .// -->
 </nav>
 </header> <!-- section-header.// -->
-
+<!-- modal -->
+  <div class="modal fade bd-example-modal-lg" id="update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Update</h5> -->
+        <div class="media">
+          <img class="mr-3" id="updateimg" width="64" height="64">
+          <input type="hidden" id="updatehid">
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="itemtitle" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" id="itemtitle">
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="itemprice" class="col-form-label">Price GHc:</label>
+                <input type="text" class="form-control" id="itemprice">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="itemQuantity" class="col-form-label">Quantities:</label>
+                <input type="text" class="form-control" id="itemQuantity">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="itemdescription" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="itemdescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="detailtemdescription" class="col-form-label">Detailed Description:</label>
+            <textarea class="form-control" id="detailtemdescription" name="detailtemdescription"></textarea>
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="UpdateSubmit()" data-dismiss="modal">Save update</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/modal  -->
 <section class="section-content bg padding-y-sm">
 <div class="container">
 <nav class="mb-3">
 <ol class="breadcrumb">
-    <li class="breadcrumb-item " aria-current="/proposals">Orders</li>
+    <li class="breadcrumb-item " aria-current="/proposals">Items out of STOCK</li>
 </ol>
 </nav>
 
@@ -164,72 +214,23 @@
       <div class="col-lg-12 card">
         <div class="col-md-12" style="margin-bottom:10px;padding-top:50px;padding-left:0px;">
               <div class="scrollbar scrollbar-primary">
-                <div class="force-overflow printout">
-                  <div class="row" id="MyOrder">
-                    <% if(orders){%>
-                      <% orders.forEach(function(e){%>
-                        <% if(e.delivered != 'delivered'){ %>
-
-                          <div class="col-md-6" style="margin-bottom:10px">
-                            <div class="card">
-                              <div class="card-header">
-                                  <span class="text-primary"> <i class="fa fa-repeat"></i> <%=e.delivered %></span><br>
-                                name: <span class="text-default"><%=e.name %></span><br>
-                                order Id: <span class="text-default"><%=e.order_id %></span><br>
-                                Address: <span class="text-default"><%=e.address %></span>
-                                <h6 class="pull-right title">ordered <%= moment(e.timestamp).fromNow()%></h6>
-                              </div>
-                              <div class="card-body">
-                                <div class="list-group list-group-flush">
-                                <% for(var i=0;i< e.items.length;i++){%>
-                                  <a href="/pages/store-front/product_detail/p/?q=<%= e.items[i].item._id %>" class="list-group-item"><%=e.items[i].item.title%> | <%=e.items[i].qty%> pcs<span class="float-right badge badge-secondary round">Ghc <%=e.items[i].item.price%></span></a>
-                                <%}%>
-                                </div>
-                              </div>
-                              <div class="card-footer text-muted">
-                                <strong>Total price: Ghc <%=e.cart.totalPrice%></strong>
-                                <button type="button" name="button" class="btn btn-sm btn-success" id="<%=e._id%>" onClick="Delivered(this.id)">delivered</button>
-                              </div>
-                            </div>
-                          </div>
-                        <% }%>
-
-                      <%})%>
-                      <% if(orders){%>
-                        <% orders.forEach(function(e){%>
-                          <% if(e.delivered == 'delivered'){ %>
-
-                            <div class="col-md-6" style="margin-bottom:10px">
-                              <div class="card">
-                                <div class="card-header">
-                                    <span class="text-success"> <i class="fa fa-check-circle"></i> <%=e.delivered %></span><br>
-                                  name: <span class="text-default"><%=e.name %></span><br>
-                                  order Id: <span class="text-default"><%=e.order_id %></span><br>
-                                  Address: <span class="text-default"><%=e.address %></span>
-                                  <h6 class="pull-right title">ordered <%= moment(e.timestamp).fromNow()%></h6>
-                                </div>
-                                <div class="card-body">
-                                  <div class="list-group list-group-flush">
-                                  <% for(var i=0;i< e.items.length;i++){%>
-                                    <a href="/pages/store-front/product_detail/p/?q=<%= e.items[i].item._id %>" class="list-group-item"><%=e.items[i].item.title%> | <%=e.items[i].qty%> pcs<span class="float-right badge badge-secondary round">Ghc <%=e.items[i].item.price%></span></a>
-                                  <%}%>
-                                  </div>
-                                </div>
-                                <div class="card-footer text-muted">
-                                  <strong>Total price: Ghc <%=e.cart.totalPrice%></strong>
-                                  <button type="button" name="button" class="btn btn-sm btn-success" id="<%=e._id%>" onClick="Delivered(this.id)">delivered</button>
-                                </div>
-                              </div>
-                            </div>
-                          <% }%>
-
-                        <%})%>
-                      <%}%>
-
-                    <%}else{%>
-                      <h1>Orders empty</h1>
-                    <%}%>
-                  </div>
+                <div class="force-overflow ">
+                  <table class="table table-inbox table-hover">
+                    <tbody>
+                      <% if(components){ %>
+                      <% for(var i=0; i < components.length; i++){ %>
+                  <tr>
+                    <td class="view-message "> <img class="mr-3" src="../../../../images/<%= components[i].imagePath_one %>" alt="component image" width="64" height="64"></td>
+                      <td class="view-message"> <small><%= components[i].title %></small> </td>
+                      <td class="view-message"><small><b>Qty: ( <%= components[i].quantities %> pieces )</b></small></td>
+                      <td class="view-message"> <small><b>Price GHc: ( <%= components[i].price %> )</b></small> </td>
+                      <td class="view-message">
+                        <button type="button" id="<%=components[i].id %>_update" class="btn btn-sm  btn-info update-item" data-toggle="modal" data-target="#update">Update</button>
+                      </td>
+                  </tr>
+                  <%  }} %>
+              </tbody>
+                </table>
                 </div>
               </div>
 
@@ -241,5 +242,48 @@
       </main>
     </div>
   </div>
-<!-- <div class="row" id="MyOrder"> -->
-<!-- </div> -->
+  <script type="text/javascript">
+  var components = <%-JSON.stringify(components) %>
+
+         $(".update-item").on("click",function($ev){
+           var parse_id = $(this).attr('id');
+           var id = parse_id.split('_')[0];
+           components.forEach(function (items) {
+             if(items._id == id){
+               $('#updatehid').val(items._id);
+               $('#itemtitle').val(items.title);
+               $('#itemprice').val(items.price);
+               $('#itemQuantity').val(items.quantities);
+               $('#itemdescription').val(items.description);
+               $('#detailtemdescription').val(items.detailed_description);
+               $('#updateimg').attr('src','../../../../images/'+items.imagePath_one);
+
+             }
+
+           });
+         });
+
+         function UpdateSubmit() {
+              var id              = $('#updatehid').val();
+              var itemtitle       = $('#itemtitle').val();
+              var itemprice       = $('#itemprice').val();
+              var itemQuantity    = $('#itemQuantity').val();
+              var itemdescription = $('#itemdescription').val();
+              var detailtemdescription = $('#detailtemdescription').val();
+              var data = {id:id,itemtitle:itemtitle,itemprice:itemprice,itemQuantity:itemQuantity,itemdescription:itemdescription,detailtemdescription:detailtemdescription}
+                // make ajax call /areacode97/admin/outofbound/admin/items
+                $.ajax({
+                  type        : 'post',
+                  data        : data,
+                  dataType    : 'json',
+                  url         : '/areacode97/admin/outofbound/admin/ulter',
+                  success     : function(data){
+                    console.log(data);
+                    if(data.ok == 1){
+                    $(".table-inbox").load(location.href+" .table-inbox>*","");
+
+                    }
+                  }
+                });
+  }
+  </script>

@@ -13,6 +13,7 @@ var ContactUs             = require('./models/contactus');
 var proposal              = require('./models/proposal');
 var Cart                  = require('./models/cart');
 var Order                 = require('./models/order');
+var Items                 = require('./models/product');
 
 mongoose.connect('mongodb://localhost:27017/boticstechnologiesdb', { useNewUrlParser: true });
 var db = mongoose.connection;
@@ -74,9 +75,9 @@ app.use('/contactus', contactus);
 app.use('/areacode97/admin/outofbound/admin', admin);
 app.use('/areacode97/admin/outofbound', admin_login);
 app.use('/Search', SearchEngine);
-// app.use(function(req,res){
-//     res.render('default/error_page');
-// });
+app.use(function(req,res){
+    res.render('default/error_page');
+});
 //Start server
 var server = app.listen(3000,function () {
   console.log('Server started on port 3000...');
@@ -84,6 +85,7 @@ var server = app.listen(3000,function () {
 const io    = require('socket.io')(server);
 var msgnotify='';
 var propsnotify='';
+var oos = '';
 io.on('connection', function (socket) {
 
   setInterval(function () {
@@ -97,7 +99,24 @@ io.on('connection', function (socket) {
       socket.emit('msg', { msg: msg.length });
     });
 
-    socket.emit('notify', { msg: msgnotify,props: propsnotify});
+
+    var getArray=[];
+    var done=0;
+
+    Items.find({},function (err,result) {
+      if(err) return next(err);
+      result.forEach(function (components) {
+        done++;
+        if (components.quantities < 5) {
+          oos = 1;
+          getArray.push(components);
+        }
+      })
+      if (done == result.length) {
+      socket.emit('outofstock', { msg: getArray.length });
+      }
+  })
+    socket.emit('notify', { msg: msgnotify,props: propsnotify,oos:oos});
   },1000)
 
 });

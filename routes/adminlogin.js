@@ -26,12 +26,12 @@ router.get('/', function(req, res) {
 router.post('/',function (req,res,next) {
 
   passport.authenticate('local.signin',function (err,user,info) {
-    // console.log(user);
     if (err) throw err;
     if(!user){
       req.flash("danger","incorrect username or password");
       res.redirect('/areacode97/admin/outofbound');
     }else{
+
 
       if (user.userType) {
         req.login(user,function (error) {

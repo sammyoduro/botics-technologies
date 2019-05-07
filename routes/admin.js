@@ -18,20 +18,20 @@ var Cart = require('../models/cart');
 const moment       = require('moment');
 
 // register admin
-router.get('/adminsregistration', function(req, res) {
+router.get('/adminsregistration',isLoggedIn, function(req, res) {
   Admin.find({$or:[{userType:'SUPERADMIN'},{userType:'ADMIN'}]},function (err,admins) {
     if (err) {
       throw err;
     }
-
+    console.log(req.user);
     res.render('admin/users/registeradmins',{
       admins:admins,
-      user:req.user
+      user:req.user,
   });
   });
 
 });
-router.post('/adminsregistration',function(req, res) {
+router.post('/adminsregistration',isLoggedIn,function(req, res) {
   var fname = req.body.fname;
   var lname = req.body.lname;
   var pnumber = req.body.pnumber;
@@ -107,7 +107,7 @@ router.post('/adminsregistration',function(req, res) {
           if(err){
             throw err;
           }
-          var messages = req.flash({message:'Admin saved successfully'});
+          req.flash('success','New admin registration successfull. password: '+password);
           res.redirect('/areacode97/admin/outofbound/admin/adminsregistration');
         });
 
@@ -571,13 +571,41 @@ router.get('/orders',isLoggedIn,function (req,res) {
       cart = new Cart(order.cart);
       order.items = cart.generateArray();
     });
-    console.log(orders);
     res.render('admin/orders/orders',{
       user:req.user,
       orders:orders,
       moment:moment
     });
   });
+
+})
+router.post('/orders',isLoggedIn,function (req,res) {
+  Order.updateOne({'_id':req.body.id}, {$set: {delivered:'delivered'}}, function(err, response){
+    res.send({status:response.ok});
+  });
+})
+router.get('/outofstock',isLoggedIn,function (req,res) {
+  var getArray=[];
+  var done=0;
+
+  Items.find({},function (err,result) {
+    if(err) return next(err);
+    result.forEach(function (components) {
+      done++;
+      if (components.quantities < 5) {
+        getArray.push(components);
+      }
+    })
+    if (done == result.length) {
+      res.render('admin/outofstock/outofstock',{
+        components  :getArray,
+        user:req.user
+
+  })
+    }
+
+
+}).sort({_id:-1})
 
 })
 router.get('/page/logout',function (req,res) {

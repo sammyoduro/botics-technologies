@@ -167,6 +167,13 @@ router.get('/dashboard',isLoggedIn, function(req, res) {
   });
 
 })
+router.get('/del_order',isLoggedIn, function(req, res) {
+  let id = req.query.id;
+  Order.deleteOne({'_id':id},function (err, result) {
+    res.send({status:1})
+  })
+
+})
 // user settings
 router.get('/settings',isLoggedIn, function(req, res) {
 

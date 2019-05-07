@@ -17,6 +17,7 @@ module.exports = function Cart(oldCart) {
     storedItem.price = storedItem.item.price * storedItem.qty;
     this.totalQty++;
     this.totalPrice = +this.totalPrice + +storedItem.item.price;
+    this.totalPrice = this.totalPrice.toFixed(2);
   }
 
   this.reduceByOne = function (id) {
@@ -24,12 +25,14 @@ module.exports = function Cart(oldCart) {
     this.items[id].price-= this.items[id].item.price;
     this.totalQty--;
     this.totalPrice = +this.totalPrice - +this.items[id].item.price;
+    this.totalPrice = this.totalPrice.toFixed(2);
   }
     this.increaseByOne = function (id) {
     this.items[id].qty++;
     this.items[id].price = +this.items[id].price + +this.items[id].item.price;
     this.totalQty++;
     this.totalPrice = +this.totalPrice + +this.items[id].item.price;
+    this.totalPrice = this.totalPrice.toFixed(2);
   }
 
   this.generateArray = function () {
@@ -54,6 +57,7 @@ this.parseMidTotalprice = +this.totalPrice - +this.items[productId].price;
   this.items[productId].qty = numOfItems; //individual quantity
   this.items[productId].price = +this.items[productId].item.price * numOfItems; //aggregate price of a number of a particular item
   this.totalPrice = +this.parseMidTotalprice + this.items[productId].price;
+  this.totalPrice = this.totalPrice.toFixed(2);
   }
 this.IncreaseBydetailInput = function (item, id,numItem){
   var storedItem = this.items[id];
@@ -68,11 +72,13 @@ this.IncreaseBydetailInput = function (item, id,numItem){
     this.items[id].price = 0;
     this.items[id].price = +this.items[id].price + (+storedItem.unitPrice * +numItem);
     this.totalPrice = +this.totalPrice + +this.items[id].price;
+    this.totalPrice = this.totalPrice.toFixed(2);
   }else{
 
     this.items[id].price =  (+storedItem.unitPrice * +numItem) - this.items[id].price;
     this.items[id].price = storedItem.unitPrice * storedItem.qty;
     this.totalPrice = (+this.totalPrice + +this.items[id].price)-(storedItem.unitPrice*numItem);
+    this.totalPrice = this.totalPrice.toFixed(2);
   }
 }
 };

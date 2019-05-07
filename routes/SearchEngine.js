@@ -25,13 +25,13 @@ router.post('/',function (req,res) {
     });
   }else if(SearchFilter == 'Items'){
 
-    Product.find({title: {$regex: searchitem, $options: '/^i/'}},function (err,Items_searchResult) {
+    Product.find( {$or: [{title:{$regex: searchitem, $options: '/^i/'}},{item_category:{$regex: searchitem, $options: '/^i/'}}] },function (err,Items_searchResult) {
+      console.log(searchitem);
       for (var i = 0; i < Items_searchResult.length; i++) {
-
         getArray.push(Items_searchResult[i].title);
       }
       res.send(getArray);
-    }).skip(2).limit(5);
+    }).limit(5);
   }
 
 });
@@ -80,7 +80,6 @@ router.get('/q',function (req,res) {
 
   Item_Category.find({},function (err,itemcat) {
   Product.find( {$or: [{title:{$regex: searchitem, $options: '/^i/'}},{item_category:{$regex: searchitem, $options: '/^i/'}}] },function (err,Items_searchResult) {
-
     var paginated  = Items_searchResult.slice(offset).slice(0, perPage);
     res.render('default/SearchResults', {
       user:req.user,

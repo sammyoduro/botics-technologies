@@ -96,24 +96,32 @@ shopping_Cart();
         }); // each end.//
     } // end if
 
-// CUSTOM
-$("#searchbox").keyup(function(e){
-  var searchItem = $(this).val();
-  var SearchFilter = $("#SearchFilter").val();
-  var data = {searchItem:searchItem,SearchFilter:SearchFilter};
-  $.ajax({
-     type        : 'post',
-     data        : data,
-     dataType    : 'json',
-     url         : '/Search',
-     success     : function(data){
-        $('#searchbox').autocomplete({
-          source: data,
-          autoFocus: true
-        })
-     }
-   });
-})
+// CUSTOM search engine
+
+let input$ = Rx.Observable
+  .fromEvent(document.getElementById('searchbox'), 'keyup')
+  .map(x => x.currentTarget.value)
+  .debounceTime(1000);
+input$.subscribe(x => searchTip(x));
+
+  function searchTip(searchItem) {
+    var SearchFilter = $("#SearchFilter").val();
+    var data = {searchItem:searchItem,SearchFilter:SearchFilter};
+    $.ajax({
+       type        : 'post',
+       data        : data,
+       dataType    : 'json',
+       url         : '/Search',
+       success     : function(data){
+          $('#searchbox').autocomplete({
+            source: data,
+            autoFocus: true
+          })
+       }
+     });
+  }
+
+
 // SUBMIT PROPOSAL
 $("form#data").submit(function(e) {
 //   $('#submit_proposal').addClass('disabled');
@@ -176,7 +184,7 @@ $("#proposalsubmit").modal();
                 document.getElementById('file_errMsg').innerHTML='';
             }
 
-            if (data.ck.split(" ")[2] == "OK") {
+            if (data.ck > 0 ) {
 
               $("#proposalsubmit").modal('hide');
               document.getElementById('proposal_topic_errMsg').innerHTML='';
@@ -440,4 +448,19 @@ function shopping_Cart() {
 
     }
   });
+}
+// DELETE PROPOSAL
+function delProp(id) {
+  var data ={id:id}
+  $.ajax({
+      type        : 'get',
+      data        : data,
+      dataType    : 'json',
+      url         : '/users/del_order',
+      success     : function(data){
+        if(data.status == 1){
+          $(".ref_dash").load(location.href+" .ref_dash>*","");
+        }
+      }
+      })
 }

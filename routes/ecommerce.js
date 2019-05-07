@@ -4,11 +4,16 @@ var Product        = require('../models/product');
 var Cart           = require('../models/cart');
 var Order           = require('../models/order');
 var Item_Category  = require('../models/item_category');
+var nodemailer          = require('nodemailer');
 var async            = require('async');
 const axios = require('axios');
 const sha1 = require('sha1');
 
-
+// Current Date & Time
+var now = new Date();
+var date =  now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+var formated_time = date+" "+time;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -284,9 +289,7 @@ var ref = GenRandomRef();
       }
     })
     .catch((error)=>{
-      console.log("=============response Error===============");
       console.log(error.message);
-      console.log("============= End response Error ===================");
     })
   }
 })
@@ -304,8 +307,7 @@ if (status_code == 1) {
 // Successful payment made
 var mycart = cart.generateArray();
 var counter = 0;
-// <<<<<<<<<<<<<<<iner<<<<<<<<<<<<<
-console.log("---------------------------");
+
 mycart.forEach(function (e) {
   Product.findById(e.item._id,function (err,prdt) {
     if (err) throw err;
@@ -314,15 +316,10 @@ mycart.forEach(function (e) {
     if (prdt.quantities > 0 ) {
       Product.updateMany({'_id':e.item._id},{$set:{quantities:prdt.quantities-e.qty,orders:ordered}},function (err,callback) {
         if (err) throw err;
-        console.log('........yes.........');
-        console.log(callback);
-        console.log('.................');
       })
 
     }else{
        return false;}
-    // console.log(prdt.quantities);
-    // console.log(prdt.orders);
   })
 counter++;
 })
@@ -333,7 +330,7 @@ if (counter == mycart.length) {
   var name  = req.user.firstname+" "+req.user.lastname;
   // SEND CONFIRMATION MESSAGE TO USER
   // ---------- start sms api --------------
-  var url = "https://apps.mnotify.net/smsapi?key=7lhCpN4KlFFW0oo1UySwPEtmo&to="+req.user.phone_num+"&msg=Thank you for your purchase.\n We have received your payment.Come by our office at KNUST Computer Science Department( Dr Ansong ) Office to pick up your Item.\n Your order id is "+order_id+"&sender_id=Botics Shop"
+  var url = "https://apps.mnotify.net/smsapi?key=7lhCpN4KlFFW0oo1UySwPEtmo&to="+req.user.phone_num+"&msg=Thank you for your purchase. \nWe have received your payment of Ghc "+cart.totalPrice+".Come by our office at Aboagye Menyeh Complex, FF11, Department of Computer Science,Knust to pick up your Item. Your order id is "+order_id+"&sender_id=Botics Shop"
 
   axios.get(url)
     .then((result)=>{
@@ -359,6 +356,27 @@ if (counter == mycart.length) {
     timestamp: new Date()
   });
 
+  // send mail
+
+  var transporter = nodemailer.createTransport({
+  host: 'mail.privateemail.com',
+  port: 465,
+  secure: true,
+  tls:{ rejectUnauthorized: false},
+  auth: {
+    user: 'sales@boticstechnologies.com',
+    pass: '10student@?'
+  }
+
+  });
+var template = require('./template_sales');
+var mailOptions = {
+from: '"Botics Technologies" <sales@boticstechnologies.com>',
+to: req.user.email,
+subject: 'Payment Items Invoice',
+html: template.output(order_id,trans_ref_no,req.user,cart.generateArray(),cart.totalPrice,formated_time) // html body
+};
+transporter.sendMail(mailOptions);
   order.save(function (err,result) {
     if (err) {console.log(err);}
 
